@@ -10,7 +10,6 @@ class Clientes(models.Model):
     endereco = models.CharField(max_length=150,blank=True)
     rg = models.IntegerField(blank=True)
     cpf = models.IntegerField(blank=True)
-    descricao = models.TextField(blank=True)
      
     def __str__(self):
         return self.nome

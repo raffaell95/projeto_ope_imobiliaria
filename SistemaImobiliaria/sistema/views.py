@@ -27,7 +27,6 @@ def incluirCliente(request):
         endereco = request.POST.get('endereco'),
         rg = request.POST.get('rg'),
         cpf = request.POST.get('cpf'),
-        descricao = request.POST.get('descricao'),
         )
         return redirect('/sistema/cadastro/')
 
