@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from sistema.models import Clientes
+from login.models import Usuario
 
 # Create your views here.
 def homeSistema(request):
@@ -23,5 +24,17 @@ def incluirCliente(request):
             cpf = request.POST.get('cpf'),
             descricao = request.POST.get('descricao'),
             foto = request.POST.get('foto'),
+        )
+        return redirect('/sistema/cadastro/')
+
+
+def incluirUsuario(request):
+
+    if request.POST:
+        Usuario.objects.create(
+        nome = request.POST.get('nome'),
+        email = request.POST.get('email'),
+        senha = request.POST.get('senha'),
+        
         )
         return redirect('/sistema/cadastro/')
