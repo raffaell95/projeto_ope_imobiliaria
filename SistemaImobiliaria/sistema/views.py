@@ -9,9 +9,9 @@ def homeSistema(request):
 
 def cadastro(request):
     contexto = {
-        'clientes': Clientes.objects.all(),
-        'imoveis' : Imoveis.objects.all(),
-        'usuarios': Usuario.objects.all()
+            'clientes': Clientes.objects.all(),
+            'imoveis' : Imoveis.objects.all(),
+            'usuarios': Usuario.objects.all()
     }
     return render(request, 'cadastro.html', contexto)
 
@@ -19,14 +19,15 @@ def incluirCliente(request):
     if request.POST:
 
         Clientes.objects.create(
-        nome = request.POST.get('nome'),
-        idade = request.POST.get('idade'),
-        celular = request.POST.get('celular'),
-        email = request.POST.get('email'),
-        cep = request.POST.get('cep'),
-        endereco = request.POST.get('endereco'),
-        rg = request.POST.get('rg'),
-        cpf = request.POST.get('cpf'),
+            nome = request.POST.get('nome'),
+            idade = request.POST.get('idade'),
+            celular = request.POST.get('celular'),
+            email = request.POST.get('email'),
+            cep = request.POST.get('cep'),
+            endereco = request.POST.get('endereco'),
+            rg = request.POST.get('rg'),
+            cpf = request.POST.get('cpf'),
+            descricao = request.POST.get('descricao'),
         )
         return redirect('/sistema/cadastro/')
 
