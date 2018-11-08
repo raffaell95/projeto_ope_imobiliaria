@@ -1,7 +1,19 @@
 {% extends "base-sistema.html" %}
 
+
+
 {% block conteudo-sistema %}
 
+<section class="content-header">
+  <h1>
+    Sistema de Gestão Imobiliaria
+    <small>Cadastro</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Cadastro</li>
+  </ol>
+</section><br><br>
 
 
 <div class="row">
@@ -25,7 +37,8 @@
         <p>Clique no botão abaixo para iniciar o cadastros de novos imoveis</p>
       </div>
 
-      <a href="#" data-toggle="modal" data-target="#modal-imoveis" class="small-box-footer">Abrir formulario de cadastro <i class="fa fa-arrow-circle-right"></i></a>
+      <a href="#" data-toggle="modal" data-target="#modal-imoveis" class="small-box-footer">Abrir formulario de
+        cadastro <i class="fa fa-arrow-circle-right"></i></a>
     </div>
   </div>
   <div class="col-md-4">
@@ -46,13 +59,13 @@
 
 
 <div class="box">
-    <div class="box-header">
-      <h3 class="box-title">Lista de CLientes</h3>
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body">
-      <table id="example2" class="table table-bordered table-hover">
-        <thead>
+  <div class="box-header">
+    <h3 class="box-title">Lista de CLientes</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <table id="example2" class="table table-bordered table-hover">
+      <thead>
         <tr>
           <th>Nome</th>
           <th>Idade</th>
@@ -63,107 +76,123 @@
           <th>RG</th>
           <th>CPF</th>
           <th>Descrição</th>
+          <th>Editar | Excluir</th>
         </tr>
-        </thead>
-        <tbody>
+      </thead>
+      <tbody>
 
-          {% for cliente in clientes %}
-          <tr>
-              <td>{{cliente.nome}}</td>
-              <td>{{cliente.idade}}</td>
-              <td>{{cliente.celular}}</td>
-              <td>{{cliente.email}}</td>
-              <td>{{cliente.cep}}</td>
-              <td>{{cliente.endereco}}</td>
-              <td>{{cliente.rg}}</td>
-              <td>{{cliente.cpf}}</td>
-              <td>{{cliente.descricao}}</td>
-            
-            </tr>
-          {% endfor %}
-
-
-        </tbody>
-   
-      </table>
-    </div>
-    <!-- /.box-body -->
+        {% for cliente in clientes %}
+        <tr>
+          <td>{{cliente.nome}}</td>
+          <td>{{cliente.idade}}</td>
+          <td>{{cliente.celular}}</td>
+          <td>{{cliente.email}}</td>
+          <td>{{cliente.cep}}</td>
+          <td>{{cliente.endereco}}</td>
+          <td>{{cliente.rg}}</td>
+          <td>{{cliente.cpf}}</td>
+          <td>{{cliente.descricao}}</td>
+          <td>
+            <button class="btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+            <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
   </div>
+  </td>
+
+  </tr>
+  {% endfor %}
+
+
+  </tbody>
+
+  </table>
+</div>
+<!-- /.box-body -->
+</div>
 
 
 
-  <div class="box">
-      <div class="box-header">
-        <h3 class="box-title">Lista de Imoveis</h3>
-      </div>
-      <!-- /.box-header -->
-      <div class="box-body">
-        <table id="example3" class="table table-bordered table-hover">
-          <thead>
-          <tr>
-            <th>Nome do responsavel</th>
-            <th>Contato</th>
-            <th>CEP</th>
-            <th>Endereço</th>
-            <th>Valor da compra</th>
-            <th>valor do aluguel</th>
-            <th>Descrição do imovel</th>
-          </tr>
-          </thead>
-          <tbody>
-  
-            {% for imovel in imoveis %}
-            <tr>
-                <td>{{imovel.nome_responsavel}}</td>
-                <td>{{imovel.celular_responsavel}}</td>
-                <td>{{imovel.endereco}}</td>
-                <td>{{imovel.cep}}</td>
-                <td>{{imovel.valor_compra}}</td>
-                <td>{{imovel.valor_aluguel}}</td>
-                <td>{{imovel.descricao_imovel}}</td>
-              </tr>
-            {% endfor %}
-  
-  
-          </tbody>
-     
-        </table>
-      </div>
-      <!-- /.box-body -->
-    </div>
+<div class="box">
+  <div class="box-header">
+    <h3 class="box-title">Lista de Imoveis</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <table id="example3" class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Nome do responsavel</th>
+          <th>Contato</th>
+          <th>CEP</th>
+          <th>Endereço</th>
+          <th>Valor da compra</th>
+          <th>valor do aluguel</th>
+          <th>Descrição do imovel</th>
+          <th>Editar | Excluir</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for imovel in imoveis %}
+        <tr>
+          <td>{{imovel.nome_responsavel}}</td>
+          <td>{{imovel.celular_responsavel}}</td>
+          <td>{{imovel.endereco}}</td>
+          <td>{{imovel.cep}}</td>
+          <td>{{imovel.valor_compra}}</td>
+          <td>{{imovel.valor_aluguel}}</td>
+          <td>{{imovel.descricao_imovel}}</td>
+          <td>
+            <button class="btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+            <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+          </td>
+        </tr>
+        {% endfor %}
+
+
+      </tbody>
+
+    </table>
+  </div>
+  <!-- /.box-body -->
+</div>
 
 
 
 
-    <div class="box">
-        <div class="box-header">
-          <h3 class="box-title">Lista de Usuarios</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-          <table id="example3" class="table table-bordered table-hover">
-            <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Email</th>
-            </tr>
-            </thead>
-            <tbody>
-    
-              {% for usuario in usuarios %}
-              <tr>
-                  <td>{{usuario.nome}}</td>
-                  <td>{{usuario.email}}</td>
-                </tr>
-              {% endfor %}
-    
-    
-            </tbody>
-       
-          </table>
-        </div>
-        <!-- /.box-body -->
-      </div>
+<div class="box">
+  <div class="box-header">
+    <h3 class="box-title">Lista de Usuarios</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <table id="example3" class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Editar | Excluir</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for usuario in usuarios %}
+        <tr>
+          <td>{{usuario.nome}}</td>
+          <td>{{usuario.email}}</td>
+          <td>
+            <button class="btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+            <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+          </td>
+        </tr>
+        {% endfor %}
+
+
+      </tbody>
+
+    </table>
+  </div>
+  <!-- /.box-body -->
+</div>
 
 
 
@@ -336,18 +365,18 @@
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" name="valor_compra" placeholder="Valor da compra">
-              </div>
+              <input type="text" class="form-control" name="valor_compra" placeholder="Valor da compra">
+            </div>
 
-              <div class="form-group">
-                  <input type="text" class="form-control" name="valor_aluguel" placeholder="Valor do aluguel">
-                </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="valor_aluguel" placeholder="Valor do aluguel">
+            </div>
 
-                <div class="form-group">
-                    <input type="text" class="form-control" name="descricao_imovel" placeholder="Descrição do imovel">
-                  </div>
-  
-            
+            <div class="form-group">
+              <input type="text" class="form-control" name="descricao_imovel" placeholder="Descrição do imovel">
+            </div>
+
+
 
 
           </div>
