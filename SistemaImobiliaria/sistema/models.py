@@ -11,7 +11,6 @@ class Clientes(models.Model):
     rg = models.IntegerField(blank=True)
     cpf = models.IntegerField(blank=True)
     descricao = models.TextField(blank=True)
-    foto = models.ImageField(upload_to='clientes_fotos', null=True, blank=True)
      
     def __str__(self):
         return self.nome

@@ -28,7 +28,6 @@ def incluirCliente(request):
             rg = request.POST.get('rg'),
             cpf = request.POST.get('cpf'),
             descricao = request.POST.get('descricao'),
-            foto = request.POST.get('foto'),
         )
         return redirect('/sistema/cadastro/')
 
