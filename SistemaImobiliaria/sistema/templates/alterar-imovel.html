@@ -1,0 +1,64 @@
+{% extends "base-sistema.html" %}
+
+
+
+{% block conteudo-sistema %}
+
+<section class="content-header">
+  <h1>
+    Sistema de Gestão Imobiliaria
+    <small>Alterar informações do Imovel que pertence ao Sr(a): {{ imovel.nome_responsavel }}</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Cadastro</a></li>
+    <li class="active">Alterar imovel</li>
+  </ol>
+</section><br><br>
+
+
+<!--ALTARAÇÃO DE IMOVEIS-->
+
+        <form role="form" method="POST" action="">
+          {% csrf_token %}
+          <div class="box-body">
+            <div class="form-group">
+              <input type="text" class="form-control" name="nome_responsavel" placeholder="Nome do usuario" value="{{ imovel.nome_responsavel }}">
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" name="celular_responsavel" placeholder="Informe o telefone" value="{{ imovel.celular_responsavel }}">
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" name="endereco" placeholder="Informe o endereço" value="{{ imovel.endereco }}">
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" name="cep" placeholder="Informe o cep" value="{{ imovel.cep }}">
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" name="valor_compra" placeholder="Valor da compra" value="{{ imovel.valor_compra }}">
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" name="valor_aluguel" placeholder="Valor do aluguel" value="{{ imovel.valor_aluguel }}">
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" name="descricao_imovel" placeholder="Descrição do imovel" value="{{ imovel.descricao_imovel }}">
+            </div>
+
+
+
+
+          </div>
+          <!-- /.box-body -->
+
+          <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Salvar informações</button>
+          </div>
+        </form>
+     
+{% endblock %}

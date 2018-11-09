@@ -76,7 +76,7 @@
           <th>RG</th>
           <th>CPF</th>
           <th>Descrição</th>
-          <th>Editar | Excluir</th>
+          <th style="width: 106px;">Editar | Excluir</th>
         </tr>
       </thead>
       <tbody>
@@ -93,8 +93,8 @@
           <td>{{cliente.cpf}}</td>
           <td>{{cliente.descricao}}</td>
           <td>
-            <button class="btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-            <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            <a href="alterar-cliente/{{ cliente.id }}" class="btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+            <a href="remover-cliente/{{ cliente.id }}" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
   </div>
   </td>
 
@@ -127,7 +127,7 @@
           <th>Valor da compra</th>
           <th>valor do aluguel</th>
           <th>Descrição do imovel</th>
-          <th>Editar | Excluir</th>
+          <th style="width: 106px;">Editar | Excluir</th>
         </tr>
       </thead>
       <tbody>
@@ -142,8 +142,8 @@
           <td>{{imovel.valor_aluguel}}</td>
           <td>{{imovel.descricao_imovel}}</td>
           <td>
-            <button class="btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-            <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            <a href="alterar-imovel/{{ imovel.id }}" class="btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+            <a href="remover-imovel/{{ imovel.id }}" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
           </td>
         </tr>
         {% endfor %}
@@ -170,7 +170,7 @@
         <tr>
           <th>Nome</th>
           <th>Email</th>
-          <th>Editar | Excluir</th>
+          <th style="width: 106px;">Editar | Excluir</th>
         </tr>
       </thead>
       <tbody>
@@ -180,8 +180,8 @@
           <td>{{usuario.nome}}</td>
           <td>{{usuario.email}}</td>
           <td>
-            <button class="btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-            <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            <a href="alterar-usuario/{{ usuario.id}}" class="btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+            <a href="remover-usuario/{{ usuario.id }}" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
           </td>
         </tr>
         {% endfor %}
@@ -387,6 +387,7 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
+
 
 
 
