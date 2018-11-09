@@ -12,6 +12,8 @@ def entrar(request):
 
         if Usuario.objects.get(email = emailusuario) and Usuario.objects.get(senha = senhausuario):
                 return redirect('/sistema/cadastro/')
+        
+        
 
         
     
