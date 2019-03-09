@@ -51,20 +51,21 @@
       </a>
 
       <div class="navbar-custom-menu">
+         
         <ul class="nav navbar-nav">
         
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <span class="hidden-xs">Admin</span>
+              <span class="hidden-xs">perfil</span>
             </a>
             <ul class="dropdown-menu">
+             
               <!-- User image -->
               <li class="user-header">
                 
 
                 <p>
-                  Admin
                   <small>perfil</small>
                 </p>
               </li>
@@ -76,7 +77,12 @@
                   <a href="#" class="btn btn-default btn-flat">Editar</a>
                 </div>
                 <div class="pull-right">
-                  <a href="/sair/" class="btn btn-default btn-flat">Sair</a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="btn btn-default btn-flat">Sair</a>
+                    {% else %}
+                    <a href="#" class="btn btn-default btn-flat">Logar</a>
+                    {% endif %}
+                  
                 </div>
               </li>
             </ul>

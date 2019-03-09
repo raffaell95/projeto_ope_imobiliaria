@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'core',
     'sistema',
     'login',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -132,4 +133,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
 ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+
+#auth
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '/sistema/'
 
