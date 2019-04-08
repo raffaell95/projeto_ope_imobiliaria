@@ -79,12 +79,24 @@ WSGI_APPLICATION = 'SistemaImobiliaria.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+#DATABASES = {
+#    'default': {
+#       'ENGINE': 'django.db.backends.mysql', 
+#       'NAME': 'imobel',
+#       'USER': 'root',
+#      'PASSWORD': '',
+#       'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+#       'PORT': '3306',
+#   }
+#}
 
 
 # Password validation
