@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
-    'sistema',
-    'login',
     'widget_tweaks',
+    'api_banco_dado',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
