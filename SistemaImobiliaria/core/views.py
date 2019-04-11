@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models.acounts import Usuario
+from core.models.Accounts import Usuario
 
 
 
