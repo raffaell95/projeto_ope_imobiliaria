@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'widget_tweaks',
+    'api_banco_dado',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
