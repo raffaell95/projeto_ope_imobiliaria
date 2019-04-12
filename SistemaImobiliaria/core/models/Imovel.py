@@ -3,8 +3,8 @@ from .Cliente import Cliente
 from .Proprietario import Proprietario
 
 class Imovel(models.Model):
-    id_imovel = models.IntegerField(primary_key=True)  # Field name made lowercase.
-    id_proprietario = models.ForeignKey('Proprietario', models.DO_NOTHING, db_column='id_proprietario', blank=True, null=True)  # Field name made lowercase.
+    #id_imovel = models.IntegerField(primary_key=True)  # Field name made lowercase.
+    id_proprietario = models.ForeignKey(Proprietario, models.DO_NOTHING, db_column='id_proprietario', blank=True, null=True)  # Field name made lowercase.
     id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='id_cliente', blank=True, null=True)
     matricula = models.CharField(max_length=100, blank=True, null=True)
     descricao = models.CharField(max_length=255, blank=True, null=True)

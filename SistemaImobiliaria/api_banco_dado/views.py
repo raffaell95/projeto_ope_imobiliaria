@@ -147,46 +147,6 @@ def boleto_detail(request, pk):
         boleto.delete()
         return HttpResponse(status=status.HTTP_204_NO_CONTENT)
 
-# Start cliente views
-@api_view(['GET', 'POST'])
-def clientes_list(request):
-    if request.method == "GET":
-        clientes = Cliente.objects.all()
-        serializer = ClientSerializer(clientes, many=True)
-        return JsonResponse(serializer.data, safe=False)
-    
-    elif request.method == "POST":
-        dado = JSONParser().parse(request)
-        serializer = ClientSerializer(data=dado)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET', 'PUT', 'DELETE'])
-def cliente_detail(request, pk):
-    try:
-        cliente = Cliente.objects.get(pk=pk)
-    except:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-    
-    if request.method == "GET":
-        serializer = ClientSerializer(cliente)
-        return JsonResponse(serializer.data)
-
-    elif request.method == "PUT":
-        dado = JSONParser().parse(request)
-        serializer = ClientSerializer(cliente, data=dado)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == "DELETE":
-        cliente.delete()
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
-
-
 # Start contato views
 @api_view(['GET', 'POST'])
 def contatos_list(request):
@@ -224,46 +184,6 @@ def contato_detail(request, pk):
 
     elif request.method == "DELETE":
         contato.delete()
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
-
-
-# Start corretor views
-@api_view(['GET', 'POST'])
-def corretores_list(request):
-    if request.method == "GET":
-        corretores = Corretor.objects.all()
-        serializer = CorretorSerializer(corretores, many=True)
-        return JsonResponse(serializer.data, safe=False)
-    
-    elif request.method == "POST":
-        dado = JSONParser().parse(request)
-        serializer = CorretorSerializer(data=dado)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET', 'PUT', 'DELETE'])
-def corretor_detail(request, pk):
-    try:
-        corretor = Corretor.objects.get(pk=pk)
-    except:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-    
-    if request.method == "GET":
-        serializer = CorretorSerializer(corretor)
-        return JsonResponse(serializer.data)
-
-    elif request.method == "PUT":
-        dado = JSONParser().parse(request)
-        serializer = CorretorSerializer(corretor, data=dado)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == "DELETE":
-        corretor.delete()
         return HttpResponse(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -306,46 +226,6 @@ def endereco_detail(request, pk):
         endereco.delete()
         return HttpResponse(status=status.HTTP_204_NO_CONTENT)
 
-
-# Start imoveis views
-@api_view(['GET', 'POST'])
-def imoveis_list(request):
-    if request.method == "GET":
-        imoveis = Imoveis.objects.all()
-        serializer = ImovelSerializer(imoveis, many=True)
-        return JsonResponse(serializer.data, safe=False)
-    
-    elif request.method == "POST":
-        dado = JSONParser().parse(request)
-        serializer = ImovelSerializer(data=dado)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET', 'PUT', 'DELETE'])
-def imovel_detail(request, pk):
-    try:
-        imovel = Imovel.objects.get(pk=pk)
-    except:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-    
-    if request.method == "GET":
-        serializer = ImovelSerializer(imovel)
-        return JsonResponse(serializer.data)
-
-    elif request.method == "PUT":
-        dado = JSONParser().parse(request)
-        serializer = ImovelSerializer(imovel, data=dado)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == "DELETE":
-        imovel.delete()
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
-
 # Start mensagens views
 @api_view(['GET', 'POST'])
 def mensagens_list(request):
@@ -384,47 +264,6 @@ def mensagem_detail(request, pk):
     elif request.method == "DELETE":
         mensagem.delete()
         return HttpResponse(status=status.HTTP_204_NO_CONTENT)
-
-
-# Start proprietario views
-@api_view(['GET', 'POST'])
-def proprietarios_list(request):
-    if request.method == "GET":
-        proprietarios = Proprietario.objects.all()
-        serializer = ProprietarioSerializer(proprietarios, many=True)
-        return JsonResponse(serializer.data, safe=False)
-    
-    elif request.method == "POST":
-        dado = JSONParser().parse(request)
-        serializer = ProprietarioSerializer(data=dado)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET', 'PUT', 'DELETE'])
-def proprietario_detail(request, pk):
-    try:
-        proprietario = Proprietario.objects.get(pk=pk)
-    except:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-    
-    if request.method == "GET":
-        serializer = MensagemSerializer(proprietario)
-        return JsonResponse(serializer.data)
-
-    elif request.method == "PUT":
-        dado = JSONParser().parse(request)
-        serializer = ProprietarioSerializer(proprietario, data=dado)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == "DELETE":
-        proprietario.delete()
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
-
 
 # Start venda views
 @api_view(['GET', 'POST'])
@@ -467,3 +306,306 @@ def venda_detail(request, pk):
 
 
 
+# Start cadastro cliente views
+@api_view(['GET', 'POST'])
+def clientes_list(request):
+    if request.method == "GET":
+        clientes = Cliente.objects.all()
+        serializer = ClientSerializer(clientes, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == "POST":
+        dado = JSONParser().parse(request)
+        cliente = ClientSerializer(data=dado)
+        if cliente.is_valid():
+            cliente.save()
+            dado['id_cliente'] = cliente.data['id']
+            endereco = EnderecoSerializer(data=dado)
+            contato = ContatoSerializer(data=dado)
+            if endereco.is_valid() and contato.is_valid():
+                endereco.save()
+                contato.save()
+                cliente_dados = {}
+                cliente_dados['cliente'] = cliente.data
+                cliente_dados['endereco'] = endereco.data
+                cliente_dados['contato'] = contato.data
+                return JsonResponse(cliente_dados, status=status.HTTP_201_CREATED)
+            else:
+                cliente_error = {}
+                cliente_error['cliente'] = cliente.errors
+                cliente_error['endereco'] = endereco.errors
+                cliente_error['contato'] = contato.errors
+                return JsonResponse(cliente_error, status=status.HTTP_400_BAD_REQUEST)
+            
+        return JsonResponse(cliente.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def cliente_detail(request, pk):
+    try:
+        cliente = Cliente.objects.get(pk=pk)
+        endereco = Endereco.objects.get(id_cliente=pk)
+        contato = Contato.objects.get(id_cliente=pk)
+    except:
+        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == "GET":
+        cliente = ClientSerializer(cliente)
+        return JsonResponse(cliente.data)
+
+    elif request.method == "PUT":
+        dado = JSONParser().parse(request)
+        cliente = ClientSerializer(cliente, data=dado)
+        if cliente.is_valid():
+            cliente.save()
+            endereco = EnderecoSerializer(endereco, data=dado)
+            contato = ContatoSerializer(contato, data=dado)
+            if endereco.is_valid() and contato.is_valid():
+                endereco.save()
+                contato.save()
+                cliente_dados = {}
+                cliente_dados['cliente'] = cliente.data
+                cliente_dados['endereco'] = endereco.data
+                cliente_dados['contato'] = contato.data
+                return JsonResponse(cliente_dados)
+            else:
+                cliente_error = {}
+                cliente_error['cliente'] = cliente.errors
+                cliente_error['endereco'] = endereco.errors
+                cliente_error['contato'] = contato.errors
+                return JsonResponse(cliente_error, status=status.HTTP_400_BAD_REQUEST)
+
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == "DELETE":
+        cliente.delete()
+        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+
+# Start cadastro proprietario views
+@api_view(['GET', 'POST'])
+def proprietarios_list(request):
+    if request.method == "GET":
+        proprietarios = Proprietario.objects.all()
+        serializer = ProprietarioSerializer(proprietarios, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    if request.method == "POST":
+        dado = JSONParser().parse(request)
+        proprietario = ProprietarioSerializer(data=dado)
+
+        if proprietario.is_valid():
+            proprietario.save()
+            dado['id_proprietario'] = proprietario.data['id']
+            endereco = EnderecoSerializer(data=dado)
+            contato = ContatoSerializer(data=dado)
+
+            if endereco.is_valid() and contato.is_valid():
+                endereco.save()
+                contato.save()
+                proprietario_dados = {}
+                proprietario_dados['proprietario'] = cliente.data
+                proprietario_dados['endereco'] = endereco.data
+                proprietario_dados['contato'] = contato.data
+
+                return JsonResponse(proprietario_dados, status=status.HTTP_201_CREATED)
+                
+            else:
+                proprietario_error = {}
+                proprietario_error['proprietario'] = cliente.errors
+                proprietario_error['endereco'] = endereco.errors
+                proprietario_error['contato'] = contato.errors
+
+                return JsonResponse(proprietario_error, status=status.HTTP_400_BAD_REQUEST)
+
+        return JsonResponse(cliente.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def proprietario_detail(request, pk):
+    try:
+        proprietario = Proprietario.objects.get(pk=pk)
+        endereco = Endereco.objects.get(id_proprietario=pk)
+        contato = Contato.objects.get(id_proprietario=pk)
+    except:
+        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == "GET":
+        serializer = MensagemSerializer(proprietario)
+        return JsonResponse(serializer.data)
+
+    elif request.method == "PUT":
+        dado = JSONParser().parse(request)
+        proprietario = ProprietarioSerializer(proprietario, data=dado)
+
+        if proprietario.is_valid():
+            proprietario.save()
+            endereco = EnderecoSerializer(data=dado)
+            contato = ContatoSerializer(data=dado)
+
+            if endereco.is_valid() and contato.is_valid():
+                endereco.save()
+                contato.save()
+                proprietario_dados = {}
+                proprietario_dados['proprietario'] = proprietario.data
+                proprietario_dados['endereco'] = endereco.data
+                proprietario_dados['contato'] = contato.data
+
+                return JsonResponse(proprietario_dados, status=status.HTTP_201_CREATED)
+
+            else:
+                proprietario_error = {}
+                proprietario_error['proprietario'] = proprietario.errors
+                proprietario_error['endereco'] = endereco.errors
+                proprietario_error['contato'] = contato.errors
+
+                return JsonResponse(proprietario_error, status=status.HTTP_400_BAD_REQUEST)
+
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == "DELETE":
+        proprietario.delete()
+        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+
+
+# Start cadastro corretor views
+@api_view(['GET', 'POST'])
+def corretores_list(request):
+    if request.method == "GET":
+        corretores = Corretor.objects.all()
+        serializer = CorretorSerializer(corretores, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    if request.method == "POST":
+        dado = JSONParser().parse(request)
+        corretor = CorretorSerializer(data=dado)
+        if corretor.is_valid():
+            corretor.save()
+            dado['id_corretor'] = corretor.data['id']
+            endereco = EnderecoSerializer(data=dado)
+            contato = ContatoSerializer(data=dado)
+            if endereco.is_valid() and contato.is_valid():
+                endereco.save()
+                contato.save()
+                corretor_dados = {}
+                corretor_dados['proprietario'] = cliente.data
+                corretor_dados['endereco'] = endereco.data
+                corretor_dados['contato'] = contato.data
+                return JsonResponse(corretor_dados, status=status.HTTP_201_CREATED)
+            else:
+                corretor_error = {}
+                corretor_error['proprietario'] = cliente.errors
+                corretor_error['endereco'] = endereco.errors
+                corretor_error['contato'] = contato.errors
+                return JsonResponse(corretor_error, status=status.HTTP_400_BAD_REQUEST)
+
+        return JsonResponse(corretor.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def corretor_detail(request, pk):
+    try:
+        corretor = Corretor.objects.get(pk=pk)
+        endereco = Endereco.objects.get(id_corretor=pk)
+        contato = Contato.objects.get(id_corretor=pk)
+    except:
+        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == "GET":
+        corretor = CorretorSerializer(corretor)
+        return JsonResponse(corretor.data)
+
+    elif request.method == "PUT":
+        dado = JSONParser().parse(request)
+        corretor = CorretorSerializer(corretor, data=dado)
+        if corretor.is_valid():
+            corretor.save()
+            endereco = EnderecoSerializer(endereco, data=dado)
+            contato = ContatoSerializer(contato, data=dado)
+            if endereco.is_valid() and contato.is_valid():
+                endereco.save()
+                contato.save()
+                corretor_dados = {}
+                corretor_dados['proprietario'] = corretor.data
+                corretor_dados['endereco'] = endereco.data
+                corretor_dados['contato'] = contato.data
+
+                return JsonResponse(corretor_dados, status=status.HTTP_201_CREATED)
+
+            else:
+                corretor_error = {}
+                corretor_error['proprietario'] = corretor.errors
+                corretor_error['endereco'] = endereco.errors
+                corretor_error['contato'] = contato.errors
+
+                return JsonResponse(corretor_error, status=status.HTTP_400_BAD_REQUEST)
+
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == "DELETE":
+        corretor.delete()
+        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+
+# Start cadastro imovel views
+@api_view(['GET', 'POST'])
+def imoveis_list(request):
+    if request.method == "GET":
+        imoveis = Imoveis.objects.all()
+        serializer = ImovelSerializer(imoveis, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == "POST":
+        dado = JSONParser().parse(request)
+        imovel = ImovelSerializer(data=dado)
+        if imovel.is_valid():
+            imovel.save()
+            dado['id_imovel'] = imovel.data['id']
+            endereco = EnderecoSerializer(data=dado)
+            if endereco.is_valid():
+                endereco.save()
+                imovel_dados = {}
+                imovel_dados['proprietario'] = cliente.data
+                imovel_dados['endereco'] = endereco.data
+                return JsonResponse(imovel_dados, status=status.HTTP_201_CREATED)
+            else:
+                imovel_error = {}
+                imovel_error['proprietario'] = cliente.errors
+                imovel_error['endereco'] = endereco.errors
+                return JsonResponse(imovel_error, status=status.HTTP_400_BAD_REQUEST)
+
+        return JsonResponse(imovel.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def imovel_detail(request, pk):
+    try:
+        imovel = Imovel.objects.get(pk=pk)
+        endereco = Endereco.objects.get(id_imovel=pk)
+    except:
+        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == "GET":
+        imovel = ImovelSerializer(imovel)
+        return JsonResponse(imovel.data)
+
+    elif request.method == "PUT":
+        dado = JSONParser().parse(request)
+        imovel = ImovelSerializer(imovel, data=dado)
+        if imovel.is_valid():
+            imovel.save()
+            endereco = EnderecoSerializer(endereco, data=dado)
+            if endereco.is_valid():
+                endereco.save()
+                imovel_dados = {}
+                imovel_dados['proprietario'] = imovel.data
+                imovel_dados['endereco'] = endereco.data
+
+                return JsonResponse(imovel_dados, status=status.HTTP_201_CREATED)
+
+            else:
+                imovel_error = {}
+                imovel_error['proprietario'] = imovel.errors
+                imovel_error['endereco'] = endereco.errors
+
+                return JsonResponse(imovel_error, status=status.HTTP_400_BAD_REQUEST)
+                
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == "DELETE":
+        imovel.delete()
+        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
