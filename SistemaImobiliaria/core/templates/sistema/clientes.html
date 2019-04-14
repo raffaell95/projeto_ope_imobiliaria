@@ -69,39 +69,41 @@
           <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Incluir novo cliente</h4>
       </div>
-      <form action="/api/cliente/" method="POST">
+
+      
+      <form id="form-cliente" action="/api/cliente/" method="POST">
         <div class="modal-body">
 
           <fieldset>
             <legend>DADOS PESSOAIS</legend>
-            <div class="col-md-8"><input class="form-control" type="text" placeholder="Nome"></div>
-            <div class="col-md-4"><input class="form-control" type="text" placeholder="CPF"></div>
+            <div class="col-md-8"><input name="nome" class="form-control" type="text" placeholder="Nome"></div>
+            <div class="col-md-4"><input name="cpf" class="form-control" type="text" placeholder="CPF"></div>
 
           </fieldset>
 
           <fieldset style="margin-top: 20px;">
             <legend>ENREDEÇO</legend>
-            <div class="col-md-7"><input class="form-control" type="text" placeholder="Lougradouro"></div>
-            <div class="col-md-5"><input class="form-control" type="text" placeholder="Bairro"></div>
-            <div class="col-md-3" style="margin-top: 10px;"><input class="form-control" type="text" placeholder="CEP">
+            <div class="col-md-7"><input name="endereco" class="form-control" type="text" placeholder="Lougradouro"></div>
+            <div class="col-md-5"><input name="bairro" class="form-control" type="text" placeholder="Bairro"></div>
+            <div class="col-md-3" style="margin-top: 10px;"><input name="cep" class="form-control" type="text" placeholder="CEP">
             </div>
-            <div class="col-md-7" style="margin-top: 10px;"><input class="form-control" type="text"
+            <div class="col-md-7" style="margin-top: 10px;"><input name="estado" class="form-control" type="text"
                 placeholder="Estado"></div>
-            <div class="col-md-2" style="margin-top: 10px;"><input class="form-control" type="text" placeholder="UF">
+            <div class="col-md-2" style="margin-top: 10px;"><input name="uf" class="form-control" type="text" placeholder="UF">
             </div>
           </fieldset>
 
           <fieldset style="margin-top: 20px;">
             <legend>CONTATO</legend>
-            <div class="col-md-8"><input class="form-control" type="text" placeholder="E-mail"></div>
-            <div class="col-md-4"><input class="form-control" type="text" placeholder="Telefone"></div>
+            <div class="col-md-8"><input name="email" class="form-control" type="text" placeholder="E-mail"></div>
+            <div class="col-md-4"><input name="telefone" class="form-control" type="text" placeholder="Telefone"></div>
           </fieldset>
 
         </div>
 
         <div class="modal-footer">
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-          <button type="submit" class="btn btn-primary">Incluir</button>
+          <button id="btn-cad-cliente" type="submit" class="btn btn-primary">Incluir</button>
         </div>
       </form>
     </div>
