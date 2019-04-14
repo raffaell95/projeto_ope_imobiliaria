@@ -37,21 +37,21 @@
         </tr>
       </thead>
       <tbody>
+      {% for cliente in clientes %}
         <tr>
-          <td>Vejeta Sayajin</td>
-          <td>057.821.963.86</td>
-          <td>Corporação capsula</td>
-          <td>Sei la onde fica</td>
-          <td>04941-010</td>
-          <td>São Paulo</td>
-          <td>SP</td>
-          <td>vejeta@vejeta.com</td>
-          <td>(11) 975667910</td>
+        {% for key, values in cliente.items %}
+          <td>{{ values }}</td>
+        {% endfor %}
+        
           <td>
             <a href="#"><i class="fa fa-pencil-square-o"></i></a>
             <a href="#" data-toggle="modal" data-target="#modal-exluir-cliente"><i class="fa fa-trash-o"></i></a>
           </td>
-        </tr>
+          </tr>
+      
+      {% endfor %}
+          
+        
       </tbody>
     </table>
   </div>
@@ -71,7 +71,8 @@
       </div>
 
       
-      <form id="form-cliente" action="/api/cliente/" method="POST">
+      <form id="form-cliente" action="" method="POST">
+        {% csrf_token %}
         <div class="modal-body">
 
           <fieldset>
