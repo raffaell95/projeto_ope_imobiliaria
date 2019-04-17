@@ -6,7 +6,7 @@ from .Corretor import Corretor
 
 class Endereco(models.Model):
     #id_endereco = models.IntegerField(primary_key=True)
-    id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='id_cliente', blank=True, null=True)
+    id_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, db_column='id_cliente', blank=True, null=True)
     id_imovel = models.ForeignKey(Imovel, models.DO_NOTHING, db_column='id_imovel', blank=True, null=True)
     id_proprietario = models.ForeignKey(Proprietario, models.DO_NOTHING, db_column='id_proprietario', blank=True, null=True)
     id_corretor = models.ForeignKey(Corretor, models.DO_NOTHING, db_column='id_corretor', blank=True, null=True)

@@ -37,13 +37,13 @@ def cadastro(request):
     
     return render(request, 'sistema/cadastro.html')
 
+def delete_cliente(request, pk):
+    url = f"http://localhost:8000/api/cliente/{pk}"
+    requests.api.delete(url)
 
-def cadastroClientes(request):
-    # TODO: END-POINT API PARA RETORNAR
-    # TODOS DADOS DO CLIENTE NECESSARIOS 
-    # DA PAGINA, SEM FOREIGN KEYS DE OUTRAS
-    # TABELAS E IDS 
+    return redirect('/cadastro/clientes')
 
+def cadastro_clientes(request):
     clientes = []
     url = "http://localhost:8000/api/cliente/"
     todos_clientes = requests.api.get(url).json()
@@ -52,9 +52,6 @@ def cadastroClientes(request):
         url_contato = f"http://localhost:8000/api/contato/{i['id']}"
         endereco = requests.api.get(url_endereco).json()
         contato = requests.api.get(url_contato).json()
-        
-        # DELETANDO DADOS DESNECESSARIOS
-        del i["id"]
         del endereco["id_cliente"], endereco["id_corretor"], endereco["id_imovel"], endereco["id"]
         del contato["id_cliente"], contato["id_corretor"], contato["id"]
 
@@ -66,19 +63,19 @@ def cadastroClientes(request):
 
     if request.method == "POST":
         cliente = {}
-        cliente['nome'] = request.POST.get("nome")
-        cliente['cpf'] =request.POST.get("cpf")
-        cliente['endereco'] =request.POST.get("endereco")
-        cliente['bairro'] =request.POST.get("bairro")
-        cliente['cep'] =request.POST.get("cep")
-        cliente['estado'] =request.POST.get("estado")
-        cliente['uf'] =request.POST.get("uf")
-        cliente['email'] =request.POST.get("email")
+        cliente['nome_cliente'] = request.POST.get("nome")
+        cliente['cpf_cnpj'] = request.POST.get("cpf")
+        cliente['endereco'] = request.POST.get("endereco")
+        cliente['bairro'] = request.POST.get("bairro")
+        cliente['cep'] = request.POST.get("cep")
+        cliente['estado'] = request.POST.get("estado")
+        cliente['uf'] = request.POST.get("uf")
+        cliente['email'] = request.POST.get("email")
         cliente['telefone'] = request.POST.get("telefone")
         url = "http://localhost:8000/api/cliente/"
-
         retorno_api = requests.api.post(url, json=cliente).json()
-        return HttpResponse(retorno_api)
+
+        return redirect('/cadastro/clientes')
 
     return render(request, 'sistema/clientes.html', context)
 
@@ -97,7 +94,7 @@ def send_email(request):
             template_name = 'contatoEmail.html'
             send_mail_template(subject, template_name, contexto, from_email)
             context = {
-                'title': 'Premium Visa',
+                'title': 'SK imobiliaria',
                 'email_msg': 'Enviado com sucesso'
             }
             return render(request, 'index.html', context)

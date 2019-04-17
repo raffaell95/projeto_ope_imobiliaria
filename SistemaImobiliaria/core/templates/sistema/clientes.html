@@ -24,6 +24,7 @@
     <table id="example1" class="table table-bordered table-striped">
       <thead>
         <tr>
+          <th>ID</th>
           <th>Nome</th>
           <th>CPF</th>
           <th>Endereço</th>
@@ -45,7 +46,14 @@
         
           <td>
             <a href="#"><i class="fa fa-pencil-square-o"></i></a>
-            <a href="#" data-toggle="modal" data-target="#modal-exluir-cliente"><i class="fa fa-trash-o"></i></a>
+            {% for key, values in cliente.items %}
+              {% if key == 'id' %}
+                <a href="{% url 'delete_cliente' pk=values %}" id='excluir-cliente'><i class="fa fa-trash-o"></i></a>
+              {% endif %}
+            {% endfor %}
+            
+            
+            
           </td>
           </tr>
       
@@ -83,7 +91,7 @@
           </fieldset>
 
           <fieldset style="margin-top: 20px;">
-            <legend>ENREDEÇO</legend>
+            <legend>ENDEREÇO</legend>
             <div class="col-md-7"><input name="endereco" class="form-control" type="text" placeholder="Lougradouro"></div>
             <div class="col-md-5"><input name="bairro" class="form-control" type="text" placeholder="Bairro"></div>
             <div class="col-md-3" style="margin-top: 10px;"><input name="cep" class="form-control" type="text" placeholder="CEP">
@@ -96,8 +104,8 @@
 
           <fieldset style="margin-top: 20px;">
             <legend>CONTATO</legend>
-            <div class="col-md-8"><input name="email" class="form-control" type="text" placeholder="E-mail"></div>
-            <div class="col-md-4"><input name="telefone" class="form-control" type="text" placeholder="Telefone"></div>
+            <div class="col-md-8"><input name="email" class="form-control" type="email" placeholder="E-mail"></div>
+            <div class="col-md-4"><input name="telefone" class="form-control" type="tel" placeholder="Telefone"></div>
           </fieldset>
 
         </div>
@@ -125,17 +133,19 @@
         <h4 class="modal-title">Exluir cliente</h4>
       </div>
       <div class="modal-body">
-        <p>Deseja realmente exluir o cliente Vejeta?&hellip;</p>
+        <p>Deseja realmente exluir</p>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
-        <button type="button" class="btn btn-primary">Sim</button>
-      </div>
+      <form method="DELETE">
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+          <button type="button" id="btn-delete-cliente" class="btn btn-primary">Sim</button>
+        </div>
+      </form>
     </div>
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
 </div>
-
 
 {% endblock %}

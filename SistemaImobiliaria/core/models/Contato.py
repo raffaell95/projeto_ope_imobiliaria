@@ -5,7 +5,7 @@ from .Corretor import Corretor
 
 class Contato(models.Model):
     #id_contato = models.IntegerField(primary_key=True)
-    id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='id_cliente', blank=True, null=True)
+    id_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, db_column='id_cliente', blank=True, null=True)
     id_proprietario = models.ForeignKey(Proprietario, models.DO_NOTHING, db_column='id_proprietario', blank=True, null=True)
     id_corretor = models.ForeignKey(Corretor, models.DO_NOTHING, db_column='id_corretor', blank=True, null=True)
     telefone = models.CharField(max_length=100, blank=True, null=True)
