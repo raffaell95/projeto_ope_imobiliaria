@@ -48,7 +48,9 @@
             <a href="#"><i class="fa fa-pencil-square-o"></i></a>
             {% for key, values in cliente.items %}
               {% if key == 'id' %}
-                <a href="{% url 'delete_cliente' pk=values %}" id='excluir-cliente'><i class="fa fa-trash-o"></i></a>
+                <a href="#" id_cliente="{{ values }}" onclick="clickDelete('{{ values }}');" data-toggle="modal" data-target="#modal-exluir-cliente" class='excluir-cliente'>
+                  <i class="fa fa-trash-o"></i>
+                </a>
               {% endif %}
             {% endfor %}
             
@@ -124,7 +126,7 @@
 
 
 <!-- modal-excluir cliente -->
-<div class="modal fade" id="modal-exluir-cliente">
+<div class="modal fade" id="modal-exluir-cliente" id_cliente="">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -135,13 +137,10 @@
       <div class="modal-body">
         <p>Deseja realmente exluir</p>
       </div>
-      <form method="DELETE">
-        
         <div class="modal-footer">
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
           <button type="button" id="btn-delete-cliente" class="btn btn-primary">Sim</button>
         </div>
-      </form>
     </div>
     <!-- /.modal-content -->
   </div>
