@@ -106,11 +106,13 @@ $(function()
                     "text-align": "center",
                     "padding-bottom": "8px"
                   });
+                $("#btn-atualizar-cliente").css({"display": "none"});
                 $("#cpf-error-alterar").html("Digite um CPF válido!");
-
+                
                 $('#cpf-alterar').val('');
                 $('#cpf-alterar').focus();
             } else {
+                $("#btn-atualizar-cliente").css({"display": "inline-block"});
                 $("#cpf-error-alterar").html("");
             }
         } else {   
@@ -120,6 +122,7 @@ $(function()
                     "text-align": "center",
                     "padding-bottom": "8px"
                 });
+                $("#btn-atualizar-cliente").css({"display": "none"});
                 $("#cpf-error-alterar").html("Digite um CPF válido!");
                 
                 $('#cpf-alterar').val('');
@@ -163,22 +166,25 @@ $(function()
                     "text-align": "center",
                     "padding-bottom": "8px"
                   });
+                $("#btn-cad-cliente").css({"display": "none"});
                 $("#cpf-error-incluir").html("Digite um CPF válido!");
                 $('#cpf-incluir').val('');
                 $('#cpf-incluir').focus();
             } else {
+                $("#btn-cad-cliente").css({"display": "inline-block"});
                 $("#cpf-error-incluir").html("");
             }
         }
         else
-        {
-            $("#cpf-error-incluir").html("Digite um CPF válido!");
+        {   
             $("#cpf-error-incluir").css({
                 "color": "rgba(163, 5, 5, 0.966)",
                 "font-size": "12px",
                 "text-align": "center",
                 "padding-bottom": "8px"
               });
+            $("#btn-cad-cliente").css({"display": "none"});
+            $("#cpf-error-incluir").html("Digite um CPF válido!");
             $('#cpf-incluir').val('');
             $('#cpf-incluir').focus();
         }
