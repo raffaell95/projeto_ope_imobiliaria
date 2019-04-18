@@ -12,8 +12,9 @@ class Endereco(models.Model):
     id_corretor = models.ForeignKey(Corretor, models.DO_NOTHING, db_column='id_corretor', blank=True, null=True)
     endereco = models.CharField(max_length=100, blank=True, null=True)
     bairro = models.CharField(max_length=100, blank=True, null=True)
-    estado = models.CharField(max_length=100, blank=True, null=True)
+    cidade = models.CharField(max_length=100, blank=True, null=True)
     cep = models.CharField(max_length=100, blank=True, null=True)
+    uf = models.CharField(max_length=100, blank=True, null=True)
     
     class Meta:
         managed = True

@@ -22,5 +22,5 @@ urlpatterns = [
     path('', login, {'template_name': 'sistema/login.html'}),
     path('', include('core.urls')),
     path('sair/', logout, {'next_page': '/'}, name='logout'),
-    path('api/', include('api_banco_dado.urls'))
+    path('api/', include('api_banco_dado.urls'), name='api')
 ]

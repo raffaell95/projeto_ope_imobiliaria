@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from core.mail import send_mail_template
 from django.shortcuts import render, redirect
 from core.models.Accounts import Usuario
+from django.http import JsonResponse
 import requests
 
 def login(request):
@@ -37,6 +38,24 @@ def cadastro(request):
     
     return render(request, 'sistema/cadastro.html')
 
+def atualizar_view_cliente(request, pk):
+    url_cliente = f"http://localhost:8000/api/cliente/{pk}"
+    url_endereco = f"http://localhost:8000/api/endereco/{pk}"
+    url_contato = f"http://localhost:8000/api/contato/{pk}"
+    cliente = requests.api.get(url_cliente).json()
+    endereco = requests.api.get(url_endereco).json()
+    contato = requests.api.get(url_contato).json()
+
+    dados_cliente = {**cliente, **endereco, ** contato}
+
+    return JsonResponse(dados_cliente)
+
+def atualizar_cliente(request, pk):
+    url_atualizar = f"http://localhost:8000/api/cliente/{pk}"
+    requests.api.put(url_atualizar)
+
+    return redirect('/cadastro/clientes')
+
 def delete_cliente(request, pk):
     url = f"http://localhost:8000/api/cliente/{pk}"
     requests.api.delete(url)
@@ -52,8 +71,8 @@ def cadastro_clientes(request):
         url_contato = f"http://localhost:8000/api/contato/{i['id']}"
         endereco = requests.api.get(url_endereco).json()
         contato = requests.api.get(url_contato).json()
-        del endereco["id_cliente"], endereco["id_corretor"], endereco["id_imovel"], endereco["id"]
-        del contato["id_cliente"], contato["id_corretor"], contato["id"]
+        del endereco["id_cliente"], endereco["id_corretor"], endereco["id_imovel"], endereco["id"], endereco["id_proprietario"]
+        del contato["id_cliente"], contato["id_corretor"], contato["id"], contato["id_proprietario"]
 
         clientes.append({**i, **endereco, **contato})
         
@@ -68,7 +87,7 @@ def cadastro_clientes(request):
         cliente['endereco'] = request.POST.get("endereco")
         cliente['bairro'] = request.POST.get("bairro")
         cliente['cep'] = request.POST.get("cep")
-        cliente['estado'] = request.POST.get("estado")
+        cliente['cidade'] = request.POST.get("cidade")
         cliente['uf'] = request.POST.get("uf")
         cliente['email'] = request.POST.get("email")
         cliente['telefone'] = request.POST.get("telefone")
