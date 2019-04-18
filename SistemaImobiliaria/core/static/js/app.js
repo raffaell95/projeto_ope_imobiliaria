@@ -99,8 +99,7 @@ $(function()
             v[1] = v[1] % 10;
 
             //Retorna Verdadeiro se os dígitos de verificação são os esperados.
-            if ( (v[0] != cpf[9]) || (v[1] != cpf[10]) )
-            {   
+            if ( (v[0] != cpf[9]) || (v[1] != cpf[10]) ){   
                 $("#cpf-error-alterar").css({
                     "color": "rgba(163, 5, 5, 0.966)",
                     "font-size": "12px",
@@ -111,21 +110,21 @@ $(function()
 
                 $('#cpf-alterar').val('');
                 $('#cpf-alterar').focus();
+            } else {
+                $("#cpf-error-alterar").html("");
             }
-        }
-        else
-        {   
-            $("#cpf-error-alterar").css({
-                "color": "rgba(163, 5, 5, 0.966)",
-                "font-size": "12px",
-                "text-align": "center",
-                "padding-bottom": "8px"
-              });
-            $("#cpf-error-alterar").html("Digite um CPF válido!");
-            
-            $('#cpf-alterar').val('');
-            $('#cpf-alterar').focus();
-        }
+        } else {   
+                $("#cpf-error-alterar").css({
+                    "color": "rgba(163, 5, 5, 0.966)",
+                    "font-size": "12px",
+                    "text-align": "center",
+                    "padding-bottom": "8px"
+                });
+                $("#cpf-error-alterar").html("Digite um CPF válido!");
+                
+                $('#cpf-alterar').val('');
+                $('#cpf-alterar').focus();
+            }
     });
 });
 
@@ -167,6 +166,8 @@ $(function()
                 $("#cpf-error-incluir").html("Digite um CPF válido!");
                 $('#cpf-incluir').val('');
                 $('#cpf-incluir').focus();
+            } else {
+                $("#cpf-error-incluir").html("");
             }
         }
         else
