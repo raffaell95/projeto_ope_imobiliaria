@@ -50,12 +50,6 @@ def atualizar_view_cliente(request, pk):
 
     return JsonResponse(dados_cliente)
 
-def atualizar_cliente(request, pk):
-    url_atualizar = f"http://localhost:8000/api/cliente/{pk}"
-    requests.api.put(url_atualizar)
-
-    return redirect('/cadastro/clientes')
-
 def delete_cliente(request, pk):
     url = f"http://localhost:8000/api/cliente/{pk}"
     requests.api.delete(url)

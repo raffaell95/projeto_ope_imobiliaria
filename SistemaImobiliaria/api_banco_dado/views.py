@@ -354,6 +354,7 @@ def cliente_detail(request, pk):
 
     elif request.method == "PUT":
         dado = JSONParser().parse(request)
+        print(dado)
         cliente = ClientSerializer(cliente, data=dado)
         if cliente.is_valid():
             cliente.save()

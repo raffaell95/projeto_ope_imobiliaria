@@ -9,5 +9,4 @@ urlpatterns = [
     path('cadastro/clientes/', cadastro_clientes, name='cadastro-clientes'),
     path('cadastro/delete_cliente/<int:pk>/', delete_cliente, name='delete_cliente'),
     path('cadastro/atualizar_view_cliente/<int:pk>/', atualizar_view_cliente, name='atualizar_view_cliente'),
-    path('cadastro/atualizar_cliente/<int:pk>/', atualizar_cliente, name='atualizar_cliente'),
 ]
