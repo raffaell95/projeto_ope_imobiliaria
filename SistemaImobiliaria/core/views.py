@@ -7,7 +7,7 @@ from django.http import JsonResponse
 import requests
 
 def home(request):
-    return render(request, 'base.html')
+    return render(request, 'index.html')
 
 def login(request):
     return render(request, 'login.html')

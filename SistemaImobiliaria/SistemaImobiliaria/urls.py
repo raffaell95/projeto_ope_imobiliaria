@@ -20,6 +20,5 @@ from django.contrib.auth.views import login, logout
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
-    path('sair/', logout, {'next_page': '/'}, name='logout'),
     path('api/', include('api_banco_dado.urls'), name='api')
 ]

@@ -3,6 +3,7 @@ from core.views import *
 
 urlpatterns = [
     path('', home, name='home'),
+    path('login/', login, name='login'),
     path('entrar/', entrar, name='entrar'),
     path('sair/', sair, name='sair'),
     path('sistema/', homeSistema, name='home-sistema'),
