@@ -6,6 +6,9 @@ from core.models.Accounts import Usuario
 from django.http import JsonResponse
 import requests
 
+def home(request):
+    return render(request, 'base.html')
+
 def login(request):
     return render(request, 'login.html')
 
