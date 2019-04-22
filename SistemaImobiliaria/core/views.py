@@ -120,11 +120,12 @@ def cadastro_imoveis(request):
         url_contato = f"http://localhost:8000/api/contato/{i['id_proprietario']}"
         endereco = requests.api.get(url_endereco).json()
         contato = requests.api.get(url_contato).json()
-        print(endereco, contato)
         del endereco["id_cliente"], endereco["id_corretor"], endereco["id_imovel"], endereco["id"], endereco["id_proprietario"]
         del contato["id_cliente"], contato["id_corretor"], contato["id"], contato["id_proprietario"]
 
         imoveis.append({**i, **endereco, **contato})
+    
+    print(imoveis)
         
     contexto = {
         'proprietarios': todos_proprietarios,

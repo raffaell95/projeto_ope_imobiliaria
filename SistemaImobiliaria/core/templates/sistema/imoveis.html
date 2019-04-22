@@ -27,17 +27,19 @@
                 <tr>
                     <th>ID</th>
                     <th>Matricula</th>
+                    <th>Descrição</th>
                     <th>IPTU</th>
                     <th>m²</th>
-                    <th>Endereco</th>
+                    <th>Proprietario</th>
+                    <th>Cliente</th>
+                    <th>Endereço</th>
                     <th>Bairro</th>
                     <th>Cidade</th>
                     <th>CEP</th>
                     <th>UF</th>
-                    <th>Proprietário</th>
                     <th>Telefone</th>
                     <th>Email</th>
-                    <th>Ações</th>
+                    <th>Ação</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,7 +50,7 @@
                         {% endfor %}
                         
                         <td>
-                            {% for key, value in imoveis.items %}
+                            {% for key, value in imovel.items %}
                                 {% if key == 'id' %}
                                     <a href="#" onclick="clickUpdate('{{ value }}')" id_cliente="{{ value }}" data-toggle="modal" data-target="#modal-alterar-cliente"><i class="fa fa-pencil-square-o"></i></a>
                                     <a href="#" id_cliente="{{ value }}" onclick="clickDelete('{{ value }}');" data-toggle="modal" data-target="#modal-exluir-cliente" class='excluir-cliente'>
