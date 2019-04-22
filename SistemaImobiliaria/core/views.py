@@ -57,7 +57,7 @@ def cadastro(request):
 
 def atualizar_view_cliente(request, pk):
     url_cliente = f"http://localhost:8000/api/cliente/{pk}"
-    url_endereco = f"http://localhost:8000/api/endereco/{pk}"
+    url_endereco = f"http://localhost:8000/api/endereco/{pk}/cliente"
     url_contato = f"http://localhost:8000/api/contato/{pk}"
     cliente = requests.api.get(url_cliente).json()
     endereco = requests.api.get(url_endereco).json()
@@ -78,7 +78,7 @@ def cadastro_clientes(request):
     url = "http://localhost:8000/api/cliente/"
     todos_clientes = requests.api.get(url).json()
     for i in todos_clientes:
-        url_endereco = f"http://localhost:8000/api/endereco/{i['id']}"
+        url_endereco = f"http://localhost:8000/api/endereco/{i['id']}/cliente"
         url_contato = f"http://localhost:8000/api/contato/{i['id']}"
         endereco = requests.api.get(url_endereco).json()
         contato = requests.api.get(url_contato).json()
@@ -116,7 +116,7 @@ def cadastro_imoveis(request):
     todos_proprietarios = requests.api.get(url_proprietario).json()
     imoveis = []
     for i in todos_imoveis:
-        url_endereco = f"http://localhost:8000/api/endereco/{i['id']}"
+        url_endereco = f"http://localhost:8000/api/endereco/{i['id']}/imovel"
         url_contato = f"http://localhost:8000/api/contato/{i['id_proprietario']}"
         endereco = requests.api.get(url_endereco).json()
         contato = requests.api.get(url_contato).json()

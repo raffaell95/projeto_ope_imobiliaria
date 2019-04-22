@@ -204,9 +204,16 @@ def enderecos_list(request):
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def endereco_detail(request, pk):
+def endereco_detail(request, pk, tipo):
     try:
-        endereco = Endereco.objects.get(pk=pk)
+        if tipo == "proprietario":
+            endereco = Endereco.objects.get(id_proprietario=pk)
+        elif tipo == "cliente":
+            endereco = Endereco.objects.get(id_cliente=pk)
+        elif tipo == "imovel":
+            endereco = Endereco.objects.get(id_imovel=pk)
+        elif tipo == "corretor":
+            endereco = Endereco.objects.get(id_corretor=pk)
     except:
         return HttpResponse(status=status.HTTP_404_NOT_FOUND)
     

@@ -15,7 +15,7 @@ urlpatterns = [
     path('corretor/', views.corretores_list),
     path('corretor/<int:pk>', views.corretor_detail),
     path('endereco/', views.enderecos_list),
-    path('endereco/<int:pk>', views.endereco_detail),
+    path('endereco/<int:pk>/<str:tipo>', views.endereco_detail),
     path('imovel/', views.imoveis_list),
     path('imovel/<int:pk>', views.imovel_detail),
     path('mensagem/', views.mensagens_list),
