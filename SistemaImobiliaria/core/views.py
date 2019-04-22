@@ -1,5 +1,8 @@
 from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
 from core.mail import send_mail_template
 from django.shortcuts import render, redirect
 from core.models.Accounts import Usuario
@@ -9,32 +12,43 @@ import requests
 def home(request):
     return render(request, 'index.html')
 
-def login(request):
-    return render(request, 'login.html')
+def login_page(request):
+    context = {
+        'error_msg': ''
+    }
+    
+    if request.user.is_authenticated:
+        return redirect(settings.LOGIN_REDIRECT_URL)
 
-def entrar(request):
-    emailusuario = request.POST.get('inputEmail')
-    senhausuario = request.POST.get('inputPassword')
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect(settings.LOGIN_URL_REDIRECT)
+        else:
+            context = {
+                'error_msg': 'Senha e/ou usuário inválido.'
+            }
+            return render(request, 'login.html', context)
 
-    try:
-            if Usuario.objects.get(email = emailusuario) and Usuario.objects.get(senha = senhausuario):
-                    return redirect('/cadastro/')
-            else:
-                    contexto = {'erro':'senha errada'}
-                    return redirect('/')
-    except Exception as error:
-            contexto = {'erro': 'usuario nao existe'}
-            return redirect('/')
+    return render(request, 'login.html', context)
+           
            
 def sair(request):
+    logout(request)
+    
+    return redirect('/')
+
+def registrar(request):
+    
     return redirect('/')
 
 
+def home_sistema(request):
 
-
-def homeSistema(request):
-
-    return render(request, 'sistema/home-sistema.html')
+    return render(request, 'sistema/index.html')
 
 
 def cadastro(request):
@@ -94,6 +108,31 @@ def cadastro_clientes(request):
         return redirect('/cadastro/clientes')
 
     return render(request, 'sistema/clientes.html', context)
+
+def cadastro_imoveis(request):
+    url = "http://localhost:8000/api/imovel/"
+    todos_imoveis = requests.api.get(url).json()
+    url_proprietario = "http://localhost:8000/api/proprietario/"
+    todos_proprietarios = requests.api.get(url_proprietario).json()
+    imoveis = []
+    for i in todos_imoveis:
+        url_endereco = f"http://localhost:8000/api/endereco/{i['id']}"
+        url_contato = f"http://localhost:8000/api/contato/{i['id_proprietario']}"
+        endereco = requests.api.get(url_endereco).json()
+        contato = requests.api.get(url_contato).json()
+        print(endereco, contato)
+        del endereco["id_cliente"], endereco["id_corretor"], endereco["id_imovel"], endereco["id"], endereco["id_proprietario"]
+        del contato["id_cliente"], contato["id_corretor"], contato["id"], contato["id_proprietario"]
+
+        imoveis.append({**i, **endereco, **contato})
+        
+    contexto = {
+        'proprietarios': todos_proprietarios,
+        'imoveis': imoveis
+    }
+
+    return render(request, 'sistema/imoveis.html', contexto)
+
 
 def send_email(request):
     if request.method == 'POST':

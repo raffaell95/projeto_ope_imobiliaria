@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block content %}
-  
-
 <body>
     <!-- IE panel-->
     <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
@@ -19,12 +16,24 @@
                 <div class="rd-navbar-top-panel">
                   <div class="left-side">
                     <ul class="rd-navbar-top-links list-unstyled">
-                      <li><a class="text-uppercase text-ubold" href="{% url 'login' %}"><small>Log in</small></a></li>
-                      <li><a class="text-uppercase text-ubold" href="{% url 'login' %}"><small>Register</small></a></li>
+                      {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
+                          <li><a class="text-uppercase text-ubold" href="{% url 'home-sistema' %}"><small>Gerenciamento</small></a></li>
+                        {% else %}
+                          <li><a class="text-uppercase text-ubold" href=""><small>Perfil</small></a></li>
+                        {% endif %}
+                      {% endif %}
                     </ul>
                   </div>
                   <div class="right-side">
-                    <address class="contact-info text-left"><span class="p"><span class="iconify" data-icon="mdi-email-open" data-inline="false"></span><a href="{% static 'cdn-cgi/l/email-protection#f7d4' %}"><span class="__cf_email__" data-cfemail="6900070f06290d0c04060500070247061b0e">[email&#160;protected]</span></a></span><span class="p"><span class="iconify" data-icon="mdi-phone-classic" data-inline="false"></span><a href="tel:#">1-800-1234-567</a></span></address>
+                    {% if user.is_authenticated %}
+                    <a class="text-uppercase text-ubold" href="{% url 'logout' %}"><small>Logout</small></a>
+                    {% else %}
+                    <address class="contact-info text-left">
+                      <span class="p"><a class="text-uppercase text-ubold" href="{% url 'login' %}"><small>Log in</small></a></span>
+                      <span class="p"><a class="text-uppercase text-ubold" href=""><small>Register</small></a></span>
+                    </address>
+                    {% endif %}
                   </div>
                 </div>
                 <!-- RD Navbar Panel-->

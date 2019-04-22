@@ -167,3 +167,8 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     )
 }
+
+
+
+LOGIN_URL = "/login/"
+LOGIN_URL_REDIRECT = "/"

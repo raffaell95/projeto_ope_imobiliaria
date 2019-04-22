@@ -1,75 +1,26 @@
-<!DOCTYPE html>
-{% load widget_tweaks %}
+{% extends "sistema/base-sistema.html" %}
 {% load static %}
+{% block conteudo-sistema %}
+<div class=container-login>
+    <div class="login text-center">
+        <form class="form-signin" method="POST">
+            {% csrf_token %}
+            <img class="mb-4" src="{% static 'media/logotipo.jpg' %}" alt="" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">{{ error_msg }}</h1>
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Email address" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <p class="mt-5 mb-3 text-muted">&copy; SK imóveis 2019</p>
+        </form>
+    </div>
+</div>
 
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sistema de Gestão Imobiliaria</title>
-    <link rel="stylesheet" href="{% static 'css-login/css-login.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
-
-</head>
-
-<body>
-        <header>
-                <div class="overlay"></div>
-                <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-                  <source src="{% static 'media/video-login.mp4' %}" type="video/mp4">
-                </video>
-                <div class="container h-100">
-                  <div class="d-flex text-center h-100">
-                    <div class="my-auto w-100 text-white">
-                      
-
-                      <div class="container">
-                        <div class="row">
-                          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                            <div class="card card-signin my-5">
-                              <div class="card-body">
-                                <h5 class="card-title text-center">Sistema de Gestão Imobiliaria</h5>
-                                <form class="form-signin" method="POST">
-                                    {% csrf_token %}
-                                  <div class="form-label-group">
-                                    <label id="erro">{{ erro }}</label>
-                  
-                                    {% render_field form.username class="form-control" %}
-                                    
-                                    <label for="{{ form.username.auto_id }}">Informe seu login</label>
-                                  </div>
-                    
-                                  <div class="form-label-group">
-                  
-                                    {% render_field form.password class="form-control" %}
-
-                                    <label for="{{ form.password.auto_id }}">Informe sua senha</label>
-                                  </div>
-                    
-                                  
-                                  <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Entrar</button>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-
-                    </div>
-                  </div>
-                </div>
-              </header>
-
-
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
-              <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" defer></script>
-</body>
-
-</html>
-
-
-
+{% endblock conteudo-sistema %}
+{% load static %}

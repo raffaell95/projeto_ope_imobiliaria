@@ -403,7 +403,7 @@ def proprietarios_list(request):
                 endereco.save()
                 contato.save()
                 proprietario_dados = {}
-                proprietario_dados['proprietario'] = cliente.data
+                proprietario_dados['proprietario'] = proprietario.data
                 proprietario_dados['endereco'] = endereco.data
                 proprietario_dados['contato'] = contato.data
 
@@ -411,7 +411,7 @@ def proprietarios_list(request):
                 
             else:
                 proprietario_error = {}
-                proprietario_error['proprietario'] = cliente.errors
+                proprietario_error['proprietario'] = proprietario.errors
                 proprietario_error['endereco'] = endereco.errors
                 proprietario_error['contato'] = contato.errors
 
@@ -547,7 +547,7 @@ def corretor_detail(request, pk):
 @api_view(['GET', 'POST'])
 def imoveis_list(request):
     if request.method == "GET":
-        imoveis = Imoveis.objects.all()
+        imoveis = Imovel.objects.all()
         serializer = ImovelSerializer(imoveis, many=True)
         return JsonResponse(serializer.data, safe=False)
 
@@ -561,12 +561,12 @@ def imoveis_list(request):
             if endereco.is_valid():
                 endereco.save()
                 imovel_dados = {}
-                imovel_dados['proprietario'] = cliente.data
+                imovel_dados['proprietario'] = imovel.data
                 imovel_dados['endereco'] = endereco.data
                 return JsonResponse(imovel_dados, status=status.HTTP_201_CREATED)
             else:
                 imovel_error = {}
-                imovel_error['proprietario'] = cliente.errors
+                imovel_error['proprietario'] = imovel.errors
                 imovel_error['endereco'] = endereco.errors
                 return JsonResponse(imovel_error, status=status.HTTP_400_BAD_REQUEST)
 
