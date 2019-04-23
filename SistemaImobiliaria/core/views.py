@@ -124,13 +124,30 @@ def cadastro_imoveis(request):
         del contato["id_cliente"], contato["id_corretor"], contato["id"], contato["id_proprietario"]
 
         imoveis.append({**i, **endereco, **contato})
-    
-    print(imoveis)
         
     contexto = {
         'proprietarios': todos_proprietarios,
         'imoveis': imoveis
     }
+
+
+    if request.method == "POST":
+        imovel = {}
+        imovel['descricao'] = request.POST.get('descricao')
+        imovel['id_proprietario'] = request.POST.get('id_proprietario')
+        imovel['matricula'] = request.POST.get('matricula')
+        imovel['iptu'] = request.POST.get('iptu')
+        imovel['metro_quadrado'] = request.POST.get('metro_quadrado')
+        imovel['endereco'] = request.POST.get('endereco')
+        imovel['bairro'] = request.POST.get('bairro')
+        imovel['cep'] = request.POST.get('cep')
+        imovel['cidade'] = request.POST.get('cidade')
+        imovel['uf'] = request.POST.get('uf')
+        url = 'http://localhost:8000/api/imovel'
+        retorno_api = requests.api.post(url, json=imovel).json()
+
+        return redirect('/cadastro/clientes')
+
 
     return render(request, 'sistema/imoveis.html', contexto)
 
