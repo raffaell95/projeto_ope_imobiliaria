@@ -436,7 +436,7 @@ def proprietario_detail(request, pk):
         return HttpResponse(status=status.HTTP_404_NOT_FOUND)
     
     if request.method == "GET":
-        serializer = MensagemSerializer(proprietario)
+        serializer = ProprietarioSerializer(proprietario)
         return JsonResponse(serializer.data)
 
     elif request.method == "PUT":

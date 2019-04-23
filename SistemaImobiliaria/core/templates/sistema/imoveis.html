@@ -3,13 +3,13 @@
 
 <section class="content-header">
     <h1>
-        Sistema de Gestão Imobiliaria
+        Gestão Imóveis
         <small>Cadastro</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#">Home</a></li>
         <li><a href="#">Cadastro</a></li>
-        <li class="active">Clientes</li>
+        <li class="active">Imóveis</li>
     </ol>
 </section><br><br>
 
@@ -52,8 +52,8 @@
                         <td>
                             {% for key, value in imovel.items %}
                                 {% if key == 'id' %}
-                                    <a href="#" onclick="clickUpdate('{{ value }}')" id_cliente="{{ value }}" data-toggle="modal" data-target="#modal-alterar-imovel"><i class="fa fa-pencil-square-o"></i></a>
-                                    <a href="#" id_cliente="{{ value }}" onclick="clickDelete('{{ value }}');" data-toggle="modal" data-target="#modal-exluir-imovel" class='excluir-cliente'>
+                                    <a href="#" onclick="clickUpdateImovel('{{ value }}')" id_cliente="{{ value }}" data-toggle="modal" data-target="#modal-alterar-imovel"><i class="fa fa-pencil-square-o"></i></a>
+                                    <a href="#" id_imovel="{{ value }}" onclick="clickDeleteImovel('{{ value }}');" data-toggle="modal" data-target="#modal-excluir-imovel" class='excluir-cliente'>
                                         <i class="fa fa-trash-o"></i>
                                     </a>
                                 {% endif %}
@@ -98,6 +98,22 @@
                                 {% endfor %}
                             </select>
                         </div>
+
+                        <div class="col-md-4" style="padding-bottom: 4px;" >
+                            <select name="id_cliente" class="form-control">
+                                <option selected disabled>Nome Cliente</option>
+                                {% for i in clientes %}
+                                    {% for key, value in i.items %}
+                                        {% if "id" == key %}
+                                            <option value="{{ value }}">
+                                        {% endif %}
+                                                {% if "nome_cliente" == key %}
+                                                    {{ value }}</option>
+                                                {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </div>
                         
                         <div class="col-md-4"><input name="matricula" class="form-control" type="text" placeholder="Matrícula"></div>
                         <div class="col-md-4"><input name="iptu" class="form-control" type="text" placeholder="IPTU"></div>
@@ -129,20 +145,20 @@
 
 
 <!-- modal-excluir cliente -->
-<div class="modal fade" id="modal-exluir-imovel" id_cliente="">
+<div class="modal fade" id="modal-excluir-imovel" id_imovel="">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Exluir cliente</h4>
+                <h4 class="modal-title">Exluir imóvel</h4>
             </div>
             <div class="modal-body">
-                <p>Deseja realmente exluir</p>
+                <p>Deseja realmente excluir</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
-                <button type="button" id="btn-delete-cliente" class="btn btn-primary">Sim</button>
+                <button type="button" id="btn-delete-imovel" class="btn btn-primary">Sim</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -151,7 +167,7 @@
 </div>
 
 <!-- modal-cadastro de clientes -->
-<div class="modal fade" id="modal-alterar-imovel" id_cliente="">
+<div class="modal fade" id="modal-alterar-imovel" id_imovel="">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -164,9 +180,11 @@
                 <div class="modal-body">
                     <fieldset>
                             <legend>DADOS DO IMÓVEL</legend>
-                            <div class="col-md-8"><textarea name="descricao" class="form-control" placeholder="Descrição"></textarea></div>
+                            <div class="col-md-8">
+                                <textarea name="descricao" class="form-control" placeholder="Descrição"></textarea>
+                            </div>
                             <div class="col-md-4" style="padding-bottom: 4px;" >
-                                <select name="id_proprietario" class="form-control" placeholder="Proprietário">
+                                <select name="id_proprietario" class="form-control">
                                     <option selected disabled>Nome proprietário</option>
                                     {% for i in proprietarios %}
                                         {% for key, value in i.items %}
@@ -174,6 +192,22 @@
                                                 <option value="{{ value }}">
                                             {% endif %}
                                                     {% if "nome_proprietario" == key %}
+                                                        {{ value }}</option>
+                                                    {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="col-md-4" style="padding-bottom: 4px;" >
+                                <select name="id_cliente" class="form-control">
+                                    <option selected disabled>Nome Cliente</option>
+                                    {% for i in clientes %}
+                                        {% for key, value in i.items %}
+                                            {% if "id" == key %}
+                                                <option value="{{ value }}">
+                                            {% endif %}
+                                                    {% if "nome_cliente" == key %}
                                                         {{ value }}</option>
                                                     {% endif %}
                                         {% endfor %}

@@ -3,20 +3,20 @@
 
 <section class="content-header">
     <h1>
-        Gestão Clientes
+        Gestão Proprietários
         <small>Cadastro</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#">Home</a></li>
-        <li><a href="#">Cadastro</a></li>
-        <li class="active">Clientes</li>
+        <li><a href="#">Gestão</a></li>
+        <li class="active">Proprietários</li>
     </ol>
 </section><br><br>
 
 <div class="box">
     <div class="box-header">
         <div class="col-md-2">
-            <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-default">Incluir novo cliente</button>
+            <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-proprietario">Incluir novo cliente</button>
         </div>
     </div>
 
@@ -39,17 +39,17 @@
                 </tr>
             </thead>
             <tbody>
-                {% for cliente in clientes %}
+                {% for proprietario in proprietarios %}
                     <tr>
-                        {% for key, values in cliente.items %}
+                        {% for key, values in proprietario.items %}
                         <td>{{ values }}</td>
                         {% endfor %}
                         
                         <td>
-                            {% for key, value in cliente.items %}
+                            {% for key, value in proprietario.items %}
                                 {% if key == 'id' %}
-                                    <a href="#" onclick="clickUpdate('{{ value }}')" id_cliente="{{ value }}" data-toggle="modal" data-target="#modal-alterar-cliente"><i class="fa fa-pencil-square-o"></i></a>
-                                    <a href="#" id_cliente="{{ value }}" onclick="clickDelete('{{ value }}');" data-toggle="modal" data-target="#modal-exluir-cliente" class='excluir-cliente'>
+                                    <a href="#" onclick="clickUpdateProprietario('{{ value }}')" id_cliente="{{ value }}" data-toggle="modal" data-target="#modal-alterar-proprietario"><i class="fa fa-pencil-square-o"></i></a>
+                                    <a href="#" id_proprietario="{{ value }}" onclick="clickDeleteProprietario('{{ value }}');" data-toggle="modal" data-target="#modal-excluir-proprietario" class='excluir-cliente'>
                                         <i class="fa fa-trash-o"></i>
                                     </a>
                                 {% endif %}
@@ -64,13 +64,13 @@
 </div>
 
 <!-- modal-cadastro de clientes -->
-<div class="modal fade" id="modal-default">
+<div class="modal fade" id="modal-proprietario">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Incluir novo cliente</h4>
+                <h4 class="modal-title">Incluir novo proprietario</h4>
             </div>
 
             <form id="form-cliente" action="" method="POST">
@@ -113,20 +113,20 @@
 
 
 <!-- modal-excluir cliente -->
-<div class="modal fade" id="modal-exluir-cliente" id_cliente="">
+<div class="modal fade" id="modal-excluir-proprietario" id_proprietario="">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Exluir cliente</h4>
+                <h4 class="modal-title">Excluir proprietario</h4>
             </div>
             <div class="modal-body">
                 <p>Deseja realmente exluir</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
-                <button type="button" id="btn-delete-cliente" class="btn btn-primary">Sim</button>
+                <button type="button" id="btn-delete-proprietario" class="btn btn-primary">Sim</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -135,15 +135,15 @@
 </div>
 
 <!-- modal-cadastro de clientes -->
-<div class="modal fade" id="modal-alterar-cliente" id_cliente="">
+<div class="modal fade" id="modal-alterar-proprietario" id_proprietario="">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Alterar cliente</h4>
+                <h4 class="modal-title">Alterar proprietario</h4>
             </div>
-            <form id="form-cliente" action="" method="">
+            <form id="form-proprietario" action="" method="">
                 {% csrf_token %}
                 <div class="modal-body">
                     <fieldset>
@@ -171,7 +171,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-                    <button id="btn-atualizar-cliente" type="button" class="btn btn-primary">Alterar</button>
+                    <button id="btn-atualizar-proprietario" type="button" class="btn btn-primary">Alterar</button>
                 </div>
             </form>
         </div>
