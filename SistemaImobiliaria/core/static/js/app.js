@@ -41,7 +41,7 @@ function clickUpdateImovel(id){
     var url_imovel = $(location).attr('href').replace("/imoveis", "/atualizar_view_imovel/" + id);
     $.get(url_imovel, function(data){
         $('input#matricula').val(data["matricula"]);
-        $('input#descricao').val(data["descricao"]);
+        $('textarea#descricao').val(data["descricao"]);
         $('input#iptu').val(data["iptu"]);
         $('input#metro_quadrado').val(data["metro_quadrado"]);
         $('select#id_proprietario').val(data["id_proprietario"]);
@@ -51,8 +51,6 @@ function clickUpdateImovel(id){
         $('input#cidade').val(data["cidade"]);
         $('input#cep').val(data["cep"]);
         $('input#uf').val(data["uf"]);
-        $('input#email').val(data["email"]);
-        $('input#tel').val(data["telefone"]);
     });
 };
 
@@ -62,7 +60,7 @@ $("#btn-atualizar-imovel").on("click", function(){
     var href_alterar = $(location).attr("href").replace('cadastro/imoveis', 'api/imovel/' + id);
     var url_alterar = href_alterar.slice(0, -1);
     var matricula = $('input#matricula').val();
-    var descricao = $('input#descricao').val();
+    var descricao = $('textarea#descricao').val();
     var iptu = $('input#iptu').val();
     var metro_quadrado = $('input#metro_quadrado').val();
     var id_proprietario = $('select#id_proprietario').val();
@@ -72,8 +70,6 @@ $("#btn-atualizar-imovel").on("click", function(){
     var cidade = $('input#cidade').val();
     var cep = $('input#cep').val();
     var uf = $('input#uf').val();
-    var email = $('input#email').val();
-    var telefone = $('input#tel').val();
     
     $.ajax({
         url: url_alterar,
@@ -91,8 +87,6 @@ $("#btn-atualizar-imovel").on("click", function(){
             "cidade": cidade,
             "cep": cep,
             "uf": uf,
-            "email": email,
-            "telefone": telefone
         }),
         dataType: 'json',
         success: function(data) {

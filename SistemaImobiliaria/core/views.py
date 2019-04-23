@@ -63,6 +63,16 @@ def atualizar_view_cliente(request, pk):
 
     return JsonResponse(dados_cliente)
 
+def atualizar_view_imovel(request, pk):
+    url_imovel = f"http://localhost:8000/api/imovel/{pk}"
+    url_endereco = f"http://localhost:8000/api/endereco/{pk}/imovel"
+    imovel = requests.api.get(url_imovel).json()
+    endereco = requests.api.get(url_endereco).json()
+
+    dados_imovel = {**imovel, **endereco}
+    
+    return JsonResponse(dados_imovel)
+
 def atualizar_view_proprietario(request, pk):
     url_proprietario = f"http://localhost:8000/api/proprietario/{pk}"
     url_endereco = f"http://localhost:8000/api/endereco/{pk}/proprietario"

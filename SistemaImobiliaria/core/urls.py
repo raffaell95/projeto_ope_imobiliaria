@@ -15,5 +15,6 @@ urlpatterns = [
     path('cadastro/delete_imovel/<int:pk>/', delete_imovel, name='delete_imovel'),
     path('cadastro/delete_proprietario/<int:pk>/', delete_proprietario, name='delete_cliente'),
     path('cadastro/atualizar_view_cliente/<int:pk>/', atualizar_view_cliente, name='atualizar_view_cliente'),
+    path('cadastro/atualizar_view_imovel/<int:pk>/', atualizar_view_imovel, name='atualizar_view_imovel'),
     path('cadastro/atualizar_view_proprietario/<int:pk>/', atualizar_view_proprietario, name='atualizar_view_proprietario'),
 ]
