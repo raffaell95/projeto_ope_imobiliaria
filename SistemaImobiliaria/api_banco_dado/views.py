@@ -569,16 +569,17 @@ def imoveis_list(request):
         if imovel.is_valid():
             imovel.save()
             dado['id_imovel'] = imovel.data['id']
+            del dado['id_proprietario']
             endereco = EnderecoSerializer(data=dado)
             if endereco.is_valid():
                 endereco.save()
                 imovel_dados = {}
-                imovel_dados['proprietario'] = imovel.data
+                imovel_dados['imovel'] = imovel.data
                 imovel_dados['endereco'] = endereco.data
                 return JsonResponse(imovel_dados, status=status.HTTP_201_CREATED)
             else:
                 imovel_error = {}
-                imovel_error['proprietario'] = imovel.errors
+                imovel_error['imovel'] = imovel.errors
                 imovel_error['endereco'] = endereco.errors
                 return JsonResponse(imovel_error, status=status.HTTP_400_BAD_REQUEST)
 
