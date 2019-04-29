@@ -164,14 +164,14 @@ def contatos_list(request):
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def contato_detail(request, pk):
+def contato_detail(request, pk, tipo):
     try:
         if tipo == "proprietario":
-            endereco = Endereco.objects.get(id_proprietario=pk)
+            contato = Contato.objects.get(id_proprietario=pk)
         elif tipo == "cliente":
-            endereco = Endereco.objects.get(id_cliente=pk)
+            contato = Contato.objects.get(id_cliente=pk)
         elif tipo == "corretor":
-            endereco = Endereco.objects.get(id_corretor=pk)
+            contato = Contato.objects.get(id_corretor=pk)
     except:
         return HttpResponse(status=status.HTTP_404_NOT_FOUND)
     
@@ -498,13 +498,13 @@ def corretores_list(request):
                 endereco.save()
                 contato.save()
                 corretor_dados = {}
-                corretor_dados['proprietario'] = cliente.data
+                corretor_dados['corretor'] = corretor.data
                 corretor_dados['endereco'] = endereco.data
                 corretor_dados['contato'] = contato.data
                 return JsonResponse(corretor_dados, status=status.HTTP_201_CREATED)
             else:
                 corretor_error = {}
-                corretor_error['proprietario'] = cliente.errors
+                corretor_error['proprietario'] = corretor.errors
                 corretor_error['endereco'] = endereco.errors
                 corretor_error['contato'] = contato.errors
                 return JsonResponse(corretor_error, status=status.HTTP_400_BAD_REQUEST)

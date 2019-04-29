@@ -28,6 +28,7 @@
                     <th>ID</th>
                     <th>Nome</th>
                     <th>CPF</th>
+                    <th>Registro</th>
                     <th>Clientes</th>
                     <th>Endereço</th>
                     <th>Bairro</th>
@@ -40,14 +41,14 @@
                 </tr>
             </thead>
             <tbody>
-                {% for cliente in clientes %}
+                {% for corretor in corretores %}
                     <tr>
-                        {% for key, values in cliente.items %}
+                        {% for key, values in corretor.items %}
                         <td>{{ values }}</td>
                         {% endfor %}
                         
                         <td>
-                            {% for key, value in cliente.items %}
+                            {% for key, value in corretor.items %}
                                 {% if key == 'id' %}
                                     <a href="#" onclick="clickUpdateCorretor('{{ value }}')" id_corretor="{{ value }}" data-toggle="modal" data-target="#modal-alterar-corretor"><i class="fa fa-pencil-square-o"></i></a>
                                     <a href="#" id_corretor="{{ value }}" onclick="clickDeleteCorretor('{{ value }}');" data-toggle="modal" data-target="#modal-exluir-corretor" class='excluir-corretor'>
@@ -129,7 +130,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
-                <button type="button" id="btn-delete-cliente" class="btn btn-primary">Sim</button>
+                <button type="button" id="btn-delete-corretor" class="btn btn-primary">Sim</button>
             </div>
         </div>
         <!-- /.modal-content -->

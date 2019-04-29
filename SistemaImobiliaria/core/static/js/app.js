@@ -10,6 +10,18 @@ $("#btn-delete-cliente").on("click", function(){
 });
 //End delete cliente script//
 
+//Start delete cliente script//
+function clickDeleteCorretor(id){
+    $('#modal-exluir-corretor').attr('id_corretor', id);
+};
+
+$("#btn-delete-corretor").on("click", function(){
+    var id = $('#modal-exluir-corretor').attr("id_corretor");
+    var href_excluir = $(location).attr("href").replace('/corretores', '/delete_corretor/' + id);
+    $(location).attr("href", href_excluir);
+});
+//End delete cliente script//
+
 //Start delete proprietario script//
 function clickDeleteProprietario(id){
     $('#modal-excluir-proprietario').attr('id_proprietario', id);

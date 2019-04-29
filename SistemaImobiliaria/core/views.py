@@ -91,6 +91,12 @@ def delete_cliente(request, pk):
 
     return redirect('/cadastro/clientes')
 
+def delete_corretor(request, pk):
+    url = f"http://localhost:8000/api/corretor/{pk}"
+    requests.api.delete(url)
+
+    return redirect('/cadastro/corretores')
+
 def delete_imovel(request, pk):
     url = f"http://localhost:8000/api/imovel/{pk}"
     requests.api.delete(url)
@@ -223,7 +229,7 @@ def cadastro_imoveis(request):
     imoveis = []
     for i in todos_imoveis:
         url_endereco = f"http://localhost:8000/api/endereco/{i['id']}/imovel"
-        url_contato = f"http://localhost:8000/api/contato/{i['id_proprietario']}"
+        url_contato = f"http://localhost:8000/api/contato/{i['id_proprietario']}/proprietario"
         endereco = requests.api.get(url_endereco).json()
         contato = requests.api.get(url_contato).json()
         del endereco["id_cliente"], endereco["id_corretor"], endereco["id_imovel"], endereco["id"], endereco["id_proprietario"]
