@@ -166,7 +166,12 @@ def contatos_list(request):
 @api_view(['GET', 'PUT', 'DELETE'])
 def contato_detail(request, pk):
     try:
-        contato = Contato.objects.get(pk=pk)
+        if tipo == "proprietario":
+            endereco = Endereco.objects.get(id_proprietario=pk)
+        elif tipo == "cliente":
+            endereco = Endereco.objects.get(id_cliente=pk)
+        elif tipo == "corretor":
+            endereco = Endereco.objects.get(id_corretor=pk)
     except:
         return HttpResponse(status=status.HTTP_404_NOT_FOUND)
     

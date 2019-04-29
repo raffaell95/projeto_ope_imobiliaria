@@ -3,20 +3,20 @@
 
 <section class="content-header">
     <h1>
-        Gestão Clientes
+        Gestão Corretores
         <small>Cadastro</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#">Home</a></li>
         <li><a href="#">Cadastro</a></li>
-        <li class="active">Clientes</li>
+        <li class="active">Corretor</li>
     </ol>
 </section><br><br>
 
 <div class="box">
     <div class="box-header">
         <div class="col-md-2">
-            <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-default">Incluir novo cliente</button>
+            <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-corretor">Incluir novo corretor</button>
         </div>
     </div>
 
@@ -28,6 +28,7 @@
                     <th>ID</th>
                     <th>Nome</th>
                     <th>CPF</th>
+                    <th>Clientes</th>
                     <th>Endereço</th>
                     <th>Bairro</th>
                     <th>Cidade</th>
@@ -48,8 +49,8 @@
                         <td>
                             {% for key, value in cliente.items %}
                                 {% if key == 'id' %}
-                                    <a href="#" onclick="clickUpdate('{{ value }}')" id_cliente="{{ value }}" data-toggle="modal" data-target="#modal-alterar-cliente"><i class="fa fa-pencil-square-o"></i></a>
-                                    <a href="#" id_cliente="{{ value }}" onclick="clickDelete('{{ value }}');" data-toggle="modal" data-target="#modal-exluir-cliente" class='excluir-cliente'>
+                                    <a href="#" onclick="clickUpdateCorretor('{{ value }}')" id_corretor="{{ value }}" data-toggle="modal" data-target="#modal-alterar-corretor"><i class="fa fa-pencil-square-o"></i></a>
+                                    <a href="#" id_corretor="{{ value }}" onclick="clickDeleteCorretor('{{ value }}');" data-toggle="modal" data-target="#modal-exluir-corretor" class='excluir-corretor'>
                                         <i class="fa fa-trash-o"></i>
                                     </a>
                                 {% endif %}
@@ -64,13 +65,13 @@
 </div>
 
 <!-- modal-cadastro de clientes -->
-<div class="modal fade" id="modal-default">
+<div class="modal fade" id="modal-corretor">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Incluir novo cliente</h4>
+                <h4 class="modal-title">Incluir novo corretor</h4>
             </div>
 
             <form id="form-cliente" action="" method="POST">
@@ -80,6 +81,8 @@
                         <legend>DADOS PESSOAIS</legend>
                         <div id=cpf-error-incluir></div>
                         <div class="col-md-8"><input name="nome" class="form-control" type="text" placeholder="Nome"></div>
+                        <div class="col-md-4"><input name="registro" class="form-control" type="text" placeholder="Nº registro"></div>
+                        <div class="col-md-8"><input name="id_clientes" class="form-control" type="text" placeholder="Id's clientes"></div>
                         <div class="col-md-4"><input id="cpf-incluir" name="cpf" class="form-control" type="text" placeholder="CPF"></div>
                     </fieldset>
                     <fieldset style="margin-top: 20px;">
@@ -101,7 +104,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-                    <button id="btn-cad-cliente" type="submit" class="btn btn-primary">Incluir</button>
+                    <button id="btn-cad-corretor" type="submit" class="btn btn-primary">Incluir</button>
                 </div>
             </form>
         </div>
@@ -113,16 +116,16 @@
 
 
 <!-- modal-excluir cliente -->
-<div class="modal fade" id="modal-exluir-cliente" id_cliente="">
+<div class="modal fade" id="modal-exluir-corretor" id_corretor="">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Excluir cliente</h4>
+                <h4 class="modal-title">Excluir corretor</h4>
             </div>
             <div class="modal-body">
-                <p>Deseja realmente excluir</p>
+                <p>Deseja realmente exluir</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
@@ -135,22 +138,24 @@
 </div>
 
 <!-- modal-cadastro de clientes -->
-<div class="modal fade" id="modal-alterar-cliente" id_cliente="">
+<div class="modal fade" id="modal-alterar-corretor" id_corretor="">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Alterar cliente</h4>
+                <h4 class="modal-title">Alterar corretor</h4>
             </div>
             <form id="form-cliente" action="" method="">
                 {% csrf_token %}
                 <div class="modal-body">
                     <fieldset>
                         <legend>DADOS PESSOAIS</legend>
-                        <div id=cpf-error-alterar></div>
+                        <div id=cpf-error-incluir></div>
                         <div class="col-md-8"><input id="nome" name="nome" class="form-control" type="text" placeholder="Nome"></div>
-                        <div class="col-md-4"><input id="cpf-alterar" name="cpf" class="form-control" type="text" placeholder="CPF"></div>
+                        <div class="col-md-8"><input id="registro" name="registro" class="form-control" type="text" placeholder="Nº registro"></div>
+                        <div class="col-md-8"><input id="id_clientes" name="id_clientes" class="form-control" type="text" placeholder="Id's clientes"></div>
+                        <div class="col-md-4"><input id="cpf-incluir" name="cpf" class="form-control" type="text" placeholder="CPF"></div>
                     </fieldset>
                     <fieldset style="margin-top: 20px;">
                         <legend>ENDEREÇO</legend>
@@ -171,7 +176,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-                    <button id="btn-atualizar-cliente" type="button" class="btn btn-primary">Alterar</button>
+                    <button id="btn-atualizar-corretor" type="button" class="btn btn-primary">Alterar</button>
                 </div>
             </form>
         </div>
