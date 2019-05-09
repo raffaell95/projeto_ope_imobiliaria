@@ -4,15 +4,15 @@ Projeto de um sistema para imobiliária com django
 Projeto rodando no heroku: https://projeto-ope-imob.herokuapp.com/
 
 
-## Config enviroment project:
+## Config environment project:
 
-##### Create a virtual enviroment with virtualenv:
+##### Create a virtual environment with virtualenv:
 
 ```pip install virtualenv```
 
 ```virtualenv -p <enviroment>```
 
-Active virtual enviroment in > <enviroment> -> Script -> activate
+Active virtual environment in > <enviroment> -> Script -> activate
 
 install dependences
 
@@ -20,9 +20,9 @@ install dependences
 
 Migrate:
 
-python manage.py makemigrations
+```python manage.py makemigrations```
 
-python manage.py migrate
+```python manage.py migrate```
 
 run server ```python manage.py runserver```
 
