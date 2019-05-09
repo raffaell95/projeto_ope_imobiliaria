@@ -10,9 +10,9 @@ Projeto rodando no heroku: https://projeto-ope-imob.herokuapp.com/
 
 ```pip install virtualenv```
 
-```virtualenv -p <enviroment>```
+```virtualenv -p <environment>```
 
-Active virtual environment in > <enviroment> -> Script -> activate
+Active virtual environment in > <environment> -> Script -> activate
 
 install dependences
 
