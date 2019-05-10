@@ -10,7 +10,7 @@ Projeto rodando no heroku: https://projeto-ope-imob.herokuapp.com/
 
 ```pip install virtualenv```
 
-```virtualenv -p <environment>```
+```virtualenv <environment>```
 
 Active virtual environment in > <environment> -> Script -> activate
 
