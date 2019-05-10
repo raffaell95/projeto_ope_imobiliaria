@@ -20,7 +20,16 @@ def registrar(request):
     return redirect('/')
 
 def home_sistema(request):
-    return render(request, 'sistema/index.html')
+    url = "http://localhost:8000/api/imovel/"
+    todos_imoveis = requests.api.get(url).json()
+    imoveis = []
+    for i in todos_imoveis:
+        url_endereco = f"http://localhost:8000/api/endereco/{i['id']}/imovel"
+        endereco = requests.api.get(url_endereco).json()
+    contexto = {
+        'imoveis': imoveis
+    }    
+    return render(request, 'sistema/index.html', contexto)
 
 def cadastro(request):
     return render(request, 'sistema/cadastro.html')
@@ -285,3 +294,8 @@ def send_email(request):
             return render(request, 'index.html', context)
         else:
             return HttpResponse('Make sure all fields are entered and valid.')
+
+def view_endereco_imovel(request, pk):
+    url_endereco = f"http://localhost:8000/api/endereco/{pk}/imovel"
+    endereco = requests.api.get(url_endereco).json()
+    return JsonResponse(endereco)
