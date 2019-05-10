@@ -16,7 +16,7 @@
 <div class="box">
     <div class="box-header">
         <div class="col-md-2">
-            <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-proprietario">Incluir novo cliente</button>
+            <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-proprietario">Incluir novo proprietario</button>
         </div>
     </div>
 
@@ -79,24 +79,24 @@
                     <fieldset>
                         <legend>DADOS PESSOAIS</legend>
                         <div id=cpf-error-incluir></div>
-                        <div class="col-md-8"><input name="nome" class="form-control" type="text" placeholder="Nome"></div>
-                        <div class="col-md-4"><input id="cpf-incluir" name="cpf" class="form-control" type="text" placeholder="CPF"></div>
+                        <div class="col-md-8"><input name="nome" class="form-control" type="text" placeholder="Nome" maxlength="100"></div>
+                        <div class="col-md-4"><input id="cpf-incluir" name="cpf" class="form-control" type="text" placeholder="CPF" maxlength="11"/></div>
                     </fieldset>
                     <fieldset style="margin-top: 20px;">
                         <legend>ENDEREÇO</legend>
                         <div class="col-md-7"><input name="endereco" class="form-control" type="text" placeholder="Lougradouro"></div>
                         <div class="col-md-5"><input name="bairro" class="form-control" type="text" placeholder="Bairro"></div>
-                        <div class="col-md-3" style="margin-top: 10px;"><input name="cep" class="form-control" type="text" placeholder="CEP">
+                        <div class="col-md-3" style="margin-top: 10px;"><input name="cep" class="form-control" type="text" placeholder="CEP" maxlength="9">
                         </div>
                         <div class="col-md-7" style="margin-top: 10px;"><input name="cidade" class="form-control" type="text"
-                            placeholder="Cidade"></div>
-                        <div class="col-md-2" style="margin-top: 10px;"><input name="uf" class="form-control" type="text" placeholder="UF">
+                            placeholder="Cidade" maxlength="40"></div>
+                        <div class="col-md-2" style="margin-top: 10px;"><input name="uf" class="form-control" type="text" placeholder="UF"maxlength="2">
                         </div>
                     </fieldset>
                     <fieldset style="margin-top: 20px;">
                         <legend>CONTATO</legend>
                         <div class="col-md-8"><input name="email" class="form-control" type="email" placeholder="E-mail"></div>
-                        <div class="col-md-4"><input name="telefone" class="form-control" type="tel" placeholder="Telefone"></div>
+                        <div class="col-md-4"><input name="telefone" class="form-control" type="tel" placeholder="Telefone" maxlength="13"></div>
                     </fieldset>
                 </div>
                 <div class="modal-footer">
@@ -155,7 +155,7 @@
                     <fieldset style="margin-top: 20px;">
                         <legend>ENDEREÇO</legend>
                         <div class="col-md-7"><input id="endereco" name="endereco" class="form-control" type="text" placeholder="Lougradouro"></div>
-                        <div class="col-md-5"><input id="bairro" name="bairro" class="form-control" type="text" placeholder="Bairro"></div>
+                        <div class="col-md-5"><input id="bairro" name="bairro" class="form-control" type="text" placeholder="Bairro" maxlength="35"></div>
                         <div class="col-md-3" style="margin-top: 10px;"><input id="cep" name="cep" class="form-control" type="text" placeholder="CEP">
                         </div>
                         <div class="col-md-7" style="margin-top: 10px;"><input id="cidade" name="cidade" class="form-control" type="text"

@@ -8,6 +8,23 @@
     <meta charset="utf-8">
   </head>
   <body>
+    <div class="mapas_imoveis"> 
+      <div action="" method="GET" class="mapa-busca" style="padding-bottom: 3px;" >
+          {% csrf_token %}
+          <select name="id_imovel" class="form-control-mapa" placeholder="Imovel">
+              <option selected disabled>Nome imovel</option>
+              {% for i in imoveis %}
+                  {% for key, values in i.items%}
+                      {% if "id" == cep %}
+                          <option value="{{ value }}">
+                      {% endif %}
+                              {% if "endereco_imovel" == cep %}
+                                  {{ value }}</option>
+                              {% endif %}
+                  {% endfor %}
+              {% endfor %}
+          </select>
+      </div>
     <div id="map"></div>
     <script>
    function initMap() {
@@ -20,12 +37,12 @@
   var marker = new google.maps.Marker({
     position: location,
     map: map,
-   
   });
 }
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_h5CFB-pCxjBUwKXymQAsrf3dtNRgzAQ&callback=initMap"
             async defer></script>
   </body>
+</div>
 </html>
 {% endblock content %}
