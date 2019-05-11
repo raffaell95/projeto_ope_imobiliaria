@@ -11,17 +11,19 @@
     <div class="mapas_imoveis"> 
       <div action="" method="GET" class="mapa-busca" style="padding-bottom: 3px;" >
           {% csrf_token %}
-          <select name="id_imovel" class="form-control-mapa" placeholder="Imovel">
+          <select id="select_options" name="id_imovel" class="form-control-mapa" placeholder="Imovel">
               <option selected disabled>Nome imovel</option>
               {% for i in imoveis %}
-                  {% for key, values in i.items%}
-                      {% if "id" == cep %}
-                          <option value="{{ value }}">
-                      {% endif %}
-                              {% if "endereco_imovel" == cep %}
-                                  {{ value }}</option>
-                              {% endif %}
-                  {% endfor %}
+                {% for key, value in i.items %}
+                
+                  {% if "id" == key %}
+                      <option value="{{ value }}">
+                  {% endif %}
+                          {% if "endereco" == key %}
+                              {{ value }}</option>
+                          {% endif %}
+        
+                {% endfor %}
               {% endfor %}
           </select>
       </div>
