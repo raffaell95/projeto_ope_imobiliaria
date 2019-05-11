@@ -22,13 +22,17 @@ def registrar(request):
 def home_sistema(request):
     url = "http://localhost:8000/api/imovel/"
     todos_imoveis = requests.api.get(url).json()
-    imoveis = []
-    for i in todos_imoveis:
-        url_endereco = f"http://localhost:8000/api/endereco/{i['id']}/imovel"
-        endereco = requests.api.get(url_endereco).json()
+    enderecos_imoveis = []
+    for imovel in todos_imoveis:
+        for key, value in imovel.items():
+            if "id" == key:
+                url_endereco = f"http://localhost:8000/api/endereco/{value}/imovel"
+                endereco = requests.api.get(url_endereco).json()
+                enderecos_imoveis.append(endereco)
     contexto = {
-        'imoveis': imoveis
-    }    
+        'imoveis': enderecos_imoveis
+    } 
+    print(endereco)
     return render(request, 'sistema/index.html', contexto)
 
 def cadastro(request):
