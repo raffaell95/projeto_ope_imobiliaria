@@ -172,3 +172,5 @@ REST_FRAMEWORK = {
 
 LOGIN_URL = "/login/"
 LOGIN_URL_REDIRECT = "/"
+
+URL_API = "http://lucascanhaleite.pythonanywhere.com/api/"
