@@ -32,7 +32,7 @@ def home_sistema(request):
     contexto = {
         'imoveis': enderecos_imoveis
     } 
-    print(endereco)
+    
     return render(request, 'sistema/index.html', contexto)
 
 def cadastro(request):
