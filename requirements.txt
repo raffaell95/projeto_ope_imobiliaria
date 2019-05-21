@@ -17,3 +17,4 @@ whitenoise==3.3.1
 wrapt==1.10.11
 djangorestframework==3.9.2
 requests
+setuptools==0.7.3
