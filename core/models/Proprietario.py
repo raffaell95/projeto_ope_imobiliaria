@@ -1,10 +1,9 @@
 from django.db import models
+from core.models.Pessoa import Pessoa
 
-class Proprietario(models.Model):
-    #id_proprietario = models.IntegerField(primary_key=True)
-    nome_proprietario = models.CharField(max_length=100, blank=True, null=True)
-    cpf = models.CharField(max_length=100, blank=True, null=True)
-
+class Proprietario(Pessoa):
+    pessoa_juridica = models.BooleanField(default=False)
+    
     class Meta:
         managed = True
         db_table = 'proprietario'

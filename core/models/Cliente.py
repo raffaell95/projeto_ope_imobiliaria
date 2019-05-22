@@ -1,9 +1,9 @@
 from django.db import models
+from core.models.Pessoa import Pessoa
 
-class Cliente(models.Model):
-    #id_cliente = models.IntegerField(primary_key=True)
-    nome_cliente = models.CharField(max_length=100, blank=True, null=True)
-    cpf_cnpj = models.CharField(max_length=100, blank=True, null=True)
+class Cliente(Pessoa):
+    pessoa_juridica = models.BooleanField(default=False)
+    inquilino = models.BooleanField(default=True)
 
     class Meta:
         managed = True
