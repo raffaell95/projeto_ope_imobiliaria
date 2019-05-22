@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'projeto_ope_imobiliaria.urls'
+ROOT_URLCONF = 'SistemaImobiliaria.urls'
 
 TEMPLATES = [
     {
@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'projeto_ope_imobiliaria.wsgi.application'
+WSGI_APPLICATION = 'SistemaImobiliaria.wsgi.application'
 
 
 # Database

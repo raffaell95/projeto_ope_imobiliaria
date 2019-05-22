@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'projeto_ope_imobiliaria.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'SistemaImobiliaria.settings')
 
 application = get_wsgi_application()
