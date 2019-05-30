@@ -1,7 +1,7 @@
-from django.http import HttpResponse, JsonResponse
-from rest_framework.decorators import api_view
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
+from django.http import Http404
+from rest_framework import permissions
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework import status
 from api_banco_dado.serializers.cliente_serializer import ClienteSerializer
 from api_banco_dado.serializers.corretor_serializer import CorretorSerializer
@@ -13,162 +13,201 @@ from core.models.Imovel import Imovel
 from core.models.Proprietario import Proprietario
 
 
-# Start cadastro cliente views
-@api_view(['GET', 'POST'])
-def clientes_list(request):
-    if request.method == "GET":
+class ClienteList(APIView):
+    '''List all customer, or create a new customer.'''
+
+    def get(self, request, format=None):
+        """List all employees"""
+
         clientes = Cliente.objects.all()
         serializer = ClienteSerializer(clientes, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return Response(serializer.data)
 
-    elif request.method == "POST":
-        dado = JSONParser().parse(request)
-        cliente = ClienteSerializer(data=dado)
-        if cliente.is_valid():
-            cliente.save()
+    def post(self, request, format=None):
+        """Create a new employee"""
 
-        return JsonResponse(cliente.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = ClienteSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def cliente_detail(request, pk):
-    try:
-        cliente = Cliente.objects.get(pk=pk)
-    except:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-    
-    if request.method == "GET":
-        cliente = ClienteSerializer(cliente)
-        return JsonResponse(cliente.data)
 
-    elif request.method == "PUT":
-        dado = JSONParser().parse(request)
-        print(dado)
-        cliente = ClienteSerializer(cliente, data=dado)
-        if cliente.is_valid():
-            cliente.save()
+class ClienteDetail(APIView):
+    """Retrieve, update or delete an customer instance."""
 
-        return JsonResponse(cliente.errors, status=status.HTTP_400_BAD_REQUEST)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
-    elif request.method == "DELETE":
+    def get_object(self, pk):
+        try:
+            return Cliente.objects.get(pk=pk)
+        except Cliente.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        cliente = self.get_object(pk)
+        serializer = ClienteSerializer(cliente)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        cliente = self.get_object(pk)
+        serializer = ClienteSerializer(cliente, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        cliente = self.get_object(pk)
         cliente.delete()
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
-# Start cadastro proprietario views
-@api_view(['GET', 'POST'])
-def proprietarios_list(request):
-    if request.method == "GET":
-        proprietarios = Proprietario.objects.all()
-        serializer = ProprietarioSerializer(proprietarios, many=True)
-        return JsonResponse(serializer.data, safe=False)
 
-    if request.method == "POST":
-        dado = JSONParser().parse(request)
-        proprietario = ProprietarioSerializer(data=dado)
+class ProprietarioList(APIView):
+    '''List all owners, or create a new owner.'''
 
-        if proprietario.is_valid():
-            proprietario.save()
+    def get(self, request, format=None):
+        """List all owners"""
 
-        return JsonResponse(proprietario.errors, status=status.HTTP_400_BAD_REQUEST)
+        proprietario = Proprietario.objects.all()
+        serializer = ProprietarioSerializer(proprietario, many=True)
+        return Response(serializer.data)
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def proprietario_detail(request, pk):
-    try:
-        proprietario = Proprietario.objects.get(pk=pk)
-    except:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-    
-    if request.method == "GET":
+    def post(self, request, format=None):
+        """Create a new employee"""
+
+        serializer = ProprietarioSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ProprietarioDetail(APIView):
+    """Retrieve, update or delete an owner instance."""
+
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def get_object(self, pk):
+        try:
+            return Proprietario.objects.get(pk=pk)
+        except Proprietario.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        proprietario = self.get_object(pk)
         serializer = ProprietarioSerializer(proprietario)
-        return JsonResponse(serializer.data)
+        return Response(serializer.data)
 
-    elif request.method == "PUT":
-        dado = JSONParser().parse(request)
-        proprietario = ProprietarioSerializer(proprietario, data=dado)
+    def put(self, request, pk, format=None):
+        proprietario = self.get_object(pk)
+        serializer = ProprietarioSerializer(proprietario, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        if proprietario.is_valid():
-            proprietario.save()
-
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == "DELETE":
+    def delete(self, request, pk, format=None):
+        proprietario = self.get_object(pk)
         proprietario.delete()
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# Start cadastro corretor views
-@api_view(['GET', 'POST'])
-def corretores_list(request):
-    if request.method == "GET":
-        corretores = Corretor.objects.all()
-        serializer = CorretorSerializer(corretores, many=True)
-        return JsonResponse(serializer.data, safe=False)
+class ImovelList(APIView):
+    '''List all realty, or create a new realty.'''
 
-    if request.method == "POST":
-        dado = JSONParser().parse(request)
-        corretor = CorretorSerializer(data=dado)
-        if corretor.is_valid():
-            corretor.save()
+    def get(self, request, format=None):
+        """List all realty"""
 
-        return JsonResponse(corretor.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET', 'PUT', 'DELETE'])
-def corretor_detail(request, pk):
-    try:
-        corretor = Corretor.objects.get(pk=pk)
-    except:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-    
-    if request.method == "GET":
-        corretor = CorretorSerializer(corretor)
-        return JsonResponse(corretor.data)
-
-    elif request.method == "PUT":
-        dado = JSONParser().parse(request)
-        corretor = CorretorSerializer(corretor, data=dado)
-        if corretor.is_valid():
-            corretor.save()
-
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == "DELETE":
-        corretor.delete()
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
-
-# Start cadastro imovel views
-@api_view(['GET', 'POST'])
-def imoveis_list(request):
-    if request.method == "GET":
         imoveis = Imovel.objects.all()
         serializer = ImovelSerializer(imoveis, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return Response(serializer.data)
 
-    elif request.method == "POST":
-        dado = JSONParser().parse(request)
-        imovel = ImovelSerializer(data=dado)
-        if imovel.is_valid():
-            imovel.save()
+    def post(self, request, format=None):
+        """Create a new realty"""
 
-        return JsonResponse(imovel.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = ImovelSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def imovel_detail(request, pk):
-    try:
-        imovel = Imovel.objects.get(pk=pk)
-    except:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-    
-    if request.method == "GET":
-        imovel = ImovelSerializer(imovel)
-        return JsonResponse(imovel.data)
 
-    elif request.method == "PUT":
-        dado = JSONParser().parse(request)
-        imovel = ImovelSerializer(imovel, data=dado)
-        if imovel.is_valid():
-            imovel.save()
+class ImovelDetail(APIView):
+    """Retrieve, update or delete an realty instance."""
 
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
-    elif request.method == "DELETE":
+    def get_object(self, pk):
+        try:
+            return Imovel.objects.get(pk=pk)
+        except Imovel.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        imovel = self.get_object(pk)
+        serializer = ImovelSerializer(imovel)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        imovel = self.get_object(pk)
+        serializer = ImovelSerializer(imovel, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        imovel = self.get_object(pk)
         imovel.delete()
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class CorretorList(APIView):
+    '''List all realty, or create a new realty.'''
+
+    def get(self, request, format=None):
+        """List all realty"""
+
+        corretores = Corretor.objects.all()
+        serializer = CorretorSerializer(corretores, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        """Create a new realty"""
+
+        serializer = CorretorSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CorretorDetail(APIView):
+    """Retrieve, update or delete an realty instance."""
+
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def get_object(self, pk):
+        try:
+            return Corretor.objects.get(pk=pk)
+        except Corretor.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        corretor = self.get_object(pk)
+        serializer = ImovelSerializer(corretor)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        corretor = self.get_object(pk)
+        serializer = CorretorSerializer(corretor, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        corretor = self.get_object(pk)
+        corretor.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
