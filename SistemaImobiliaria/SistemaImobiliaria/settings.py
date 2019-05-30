@@ -73,6 +73,14 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
+
 WSGI_APPLICATION = 'SistemaImobiliaria.wsgi.application'
 
 
@@ -87,16 +95,16 @@ DATABASES = {
     }
 }
 
-#DATABASES = {
+# DATABASES = {
 #    'default': {
-#       'ENGINE': 'django.db.backends.mysql', 
+#       'ENGINE': 'django.db.backends.mysql',
 #       'NAME': 'imobel',
 #       'USER': 'root',
 #      'PASSWORD': '',
 #       'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
 #       'PORT': '3306',
 #   }
-#}
+# }
 
 
 # Password validation
@@ -146,15 +154,15 @@ ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
-#auth
+# auth
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/sistema/'
 
 
 # Email Settings
 CONTACT_EMAIL = 'atendimento@skimobiliaria.com.br'
-EMAIL_USE_TLS= True
-EMAIL_HOST= 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_POST = 587
@@ -167,7 +175,6 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     )
 }
-
 
 
 LOGIN_URL = "/login/"
