@@ -1,28 +1,25 @@
 # projeto_ope_imobiliaria
+
 Projeto de um sistema para imobiliária com django
 
 Projeto rodando no heroku: https://projeto-ope-imob.herokuapp.com/
 
 
-## Config environment project:
+## How to run project?
 
-##### Create a virtual environment with virtualenv:
+* Clone this repository.
+* Create virtualenv with Python 3.
+* Active the virtualenv.
+* Install dependences.
+* Run the migrations.
 
-```pip install virtualenv```
-
-```virtualenv <environment>```
-
-Active virtual environment in > <environment> -> Script -> activate
-
-install dependences
-
-```pip install -r requirements.txt```
-
-Migrate:
-
-```python manage.py makemigrations```
-
-```python manage.py migrate```
-
-run server ```python manage.py runserver```
-
+```
+git clone https://github.com/raffaell95/projeto_ope_imobiliaria.git
+cd projeto_ope_imobiliaria
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
